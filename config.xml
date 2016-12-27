@@ -7,7 +7,7 @@
     <author email="contato@mitz.com.br" href="https://vpad.com.br">
         Mitz Tecnology
     </author>
-    <icon src="app/src/img/logo_icon/android-icon-144x144.png" />
+    <icon src="src/img/logo_icon/android-icon-144x144.png" />
     <content src="app/index.html" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <access origin="*" />

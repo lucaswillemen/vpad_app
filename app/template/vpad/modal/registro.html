@@ -1,0 +1,75 @@
+<md-dialog  flex-xs="95" flex-sm="80" flex-md="60" flex-lg="60">
+<md-toolbar >
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Criar uma nova conta</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="More">
+        <md-icon md-svg-icon="close"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+      
+
+      
+      
+    <div  class="md-padding">
+  <form novalidate name="registro" ng-submit="registrar()" ng-hide="showregistro1">
+            <p>Informe os dados da sua empresa</p>
+   <md-input-container class="md-block" layout-align="center end">
+      <input ng-model="data_registro.nome" type="text" placeholder="Nome da empresa" autofocus name="empresa" required>
+      <div ng-messages="registro.empresa.$error">
+          <div ng-message="required">Informe o nome da sua empresa.</div>
+        </div>
+      </md-input-container>
+       <md-input-container class="md-block" layout-align="center end">
+      <input ng-model="data_registro.localidade" type="text" placeholder="Cidade da sede" autofocus name="localidade" required>
+      <div ng-messages="registro.localidade.$error">
+          <div ng-message="required">Informe cidade da empresa.</div>
+        </div>
+      </md-input-container>
+      <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="data_registro.nf" class="md-primary">
+            Minha empresa emite nota fiscal
+          </md-checkbox>
+
+      <div layout="row" layout-align="end center">
+      <md-progress-circular md-mode="indeterminate" ng-show="registro.$submitted" md-diameter="20"></md-progress-circular>
+      <md-button type="submit" class="md-raised md-primary" ng-disabled="registro.$invalid || registro.$submitted"> 
+        Próximo</md-button>
+        </div>
+
+      </form>
+  <form novalidate name="registro_adm" ng-submit="registrar_adm()" ng-show="showregistro1">
+            <p>Informe os dados do administrador</p>
+   <md-input-container class="md-block" layout-align="center end">
+      <input ng-model="data_registro_adm.nome" type="text" placeholder="Nome" autofocus name="nome" required>
+      <div ng-messages="registro_adm.nome.$error">
+          <div ng-message="required">Informe um nome.</div>
+        </div>
+      </md-input-container> 
+      <md-input-container class="md-block" layout-align="center end">
+      <input ng-model="data_registro_adm.email" type="email" placeholder="Email" autofocus name="email" required>
+      <div ng-messages="registro_adm.email.$error">
+          <div ng-message="required">Informe um email.</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block" layout-align="center end">
+      <input ng-model="data_registro_adm.senha" type="password" placeholder="Senha" autofocus name="senha" required>
+      <div ng-messages="registro_adm.senha.$error">
+          <div ng-message="required">Informe uma senha de acesso.</div>
+        </div>
+      </md-input-container>
+
+      <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="data_registro_adm.desenvolvedor" class="md-primary">
+            Sou desenvolvedor de sistema
+          </md-checkbox>
+      <div layout="row" layout-align="end center">
+      <md-progress-circular md-mode="indeterminate" ng-show="registro_adm.$submitted" md-diameter="20"></md-progress-circular>
+      <md-button type="submit" class="md-raised md-primary" ng-disabled="registro_adm.$invalid || registro_adm.$submitted"> 
+        Próximo</md-button></div>
+
+      </form>
+</div>
+  
+</md-dialog>

@@ -1,0 +1,160 @@
+<style type="text/css">
+    .div_logo {
+        border-radius: 50px;
+        background-color: white;
+        height: 50px;
+        width: 50px;
+    }
+</style>
+<md-toolbar>
+    <div class="md-toolbar-tools" layout="row" layout-align="center center">
+        <md-button class="md-fab md-raised" href="https://vpad.com.br" aria-label="btnperfil" layout="row" layout-align="center center" style="width:50px; height: 50px; padding-top:5px">
+            <img src="../src/img/logo_icon/android-icon-48x48.png">
+        </md-button>
+        <h2>
+            <span class="md-headline" style="font-weight: 300">  vPad</span>
+        </h2>
+        <span flex></span>
+        <md-button hide-gt-sm class=" ihid md-icon-button" aria-label="Settings" ng-click="buildToggler('painelprincipal')">
+            <md-icon md-svg-icon="close"></md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+<div class="perfil_bg">
+    <div class="md-padding" layout="column" layout-align="center center" style="background-color: rgba(255, 255, 255, 0.5);">
+        <div layout="row" layout-align="center center" ng-if="dados_user.facebook">
+            <img ng-src="{{dados_user.facebook.picture.data.url ? dados_user.facebook.picture.data.url : './src/img/profile-pic.png'}}" class="md-avatar" style="width:100%; height:100%; border-radius:50%" />
+        </div>
+        <span class="md-headline">{{dados_user.dados.nome}}</span>
+        <span class="md-subhead">{{dados_user.dados.email}}</span>
+        <md-button class="md-primary md-raised" ng-click="fblogin()" ng-if="!dados_user.facebook">
+            <md-icon md-svg-icon="facebook"></md-icon> Vincular facebook
+        </md-button>
+        <md-button class="md-fab md-primary" ng-click="btn_perfil($event)" aria-label="btnperfil">
+            <md-icon md-svg-icon="pencil"></md-icon>
+        </md-button>
+
+    </div>
+</div>
+<md-divider inset></md-divider>
+<md-content>
+<div layout="row" flex ng-show="betaVersion">
+    <md-button flex class="md-raised md-block">
+        {{remaning < 0 ? 'Sua avaliação expirou' : 'Restam '+ remaning+ ' dias de teste'}} 
+    </md-button>
+</div>
+<div layout="row" flex ng-show="betaVersion">
+    <md-button flex class="md-raised md-block md-warn" ui-sref="vpad.payment">
+        Clique aqui para ativar a conta
+    </md-button>
+</div>
+<div layout="row" flex ng-show="proxima_fatura_dias">
+    <md-button flex class="md-raised md-block md-accent" ui-sref="vpad.payment">
+        Sua próxima fatura vence {{proxima_fatura_data | date: "dd/MM"}}
+    </md-button>
+</div>
+<div layout="row" flex ng-show="proxima_fatura_hoje">
+    <md-button flex class="md-raised md-block md-accent" ui-sref="vpad.payment">
+        Sua próxima fatura vence {{proxima_fatura_hoje}}
+    </md-button>
+</div>
+<div layout="row" flex ng-show="vencida_fatura_dias">
+    <md-button flex class="md-raised md-block md-warn" ui-sref="vpad.payment">
+        Sua fatura venceu no dia {{vencida_fatura_data | date: "dd/MM"}}
+    </md-button>
+</div>
+<div layout="row" flex ng-show="aviso_block">
+    <md-button flex class="md-raised md-block md-warn" ui-sref="vpad.payment">
+        Sua conta será bloqueada em {{aviso_block}} {{aviso_block == 1 ? 'dia' : "dias"}}
+    </md-button>
+</div>
+    <md-list>
+        <!--<md-list-item ng-click="buildToggler('chat')">
+        <md-icon md-svg-icon="view-dashboard"></md-icon>
+        Dashboard
+        <span flex></span>
+        <md-badge class="" ng-if="(conversas | filter:{unread:true}).length>0">{{(conversas | filter:{unread:true}).length}}</md-badge>
+    </md-list-item>-->
+        <md-list-item ng-click="imenu='dashboard'">
+            <md-icon md-svg-icon="view-dashboard"></md-icon>
+            Administração
+            <span flex></span>
+            <md-icon md-svg-icon="chevron-down" class="md-toggle-icon " ng-class="{'toggled': imenu=='dashboard'}"></md-icon>
+        </md-list-item>
+        <md-list class="animate-slide-up " ng-show="imenu=='dashboard'">
+            <md-list-item ng-repeat="menu in menu.dashboard" ui-sref="{{menu.link}}">
+                <p class="sublist">{{menu.nome}}</p>
+            </md-list-item>
+        </md-list>
+        <div ng-hide="block">
+            <md-list-item ng-click="imenu='cadastro'">
+                <md-icon md-svg-icon="file-document"></md-icon>
+                Cadastros
+                <span flex></span>
+                <md-icon md-svg-icon="chevron-down" class="md-toggle-icon " ng-class="{'toggled': imenu=='cadastro'}"></md-icon>
+            </md-list-item>
+            <md-list class="animate-slide-up " ng-show="imenu=='cadastro'">
+                <md-list-item ng-repeat="menu in menu.cadastro" ui-sref="{{menu.link}}">
+                    <p class="sublist">{{menu.nome}}</p>
+                </md-list-item>
+            </md-list>
+            <md-list-item ng-click="imenu='movimentacao'">
+                <md-icon md-svg-icon="tumblr-reblog"></md-icon>
+                Movimentações
+                <span flex></span>
+                <md-icon md-svg-icon="chevron-down" class="md-toggle-icon " ng-class="{'toggled': imenu=='movimentacao'}"></md-icon>
+            </md-list-item>
+            <md-list class="animate-slide-up" ng-show="imenu=='movimentacao'">
+                <md-list-item ng-repeat="menu in menu.operacional" ui-sref="{{menu.link}}">
+                    <p class="sublist">{{menu.nome}}</p>
+                </md-list-item>
+            </md-list>
+            <md-list-item ng-click="imenu='financeiro'">
+                <md-icon md-svg-icon="scale-balance"></md-icon>
+                Financeiro
+                <span flex></span>
+                <md-icon md-svg-icon="chevron-down" class="md-toggle-icon " ng-class="{'toggled': imenu=='financeiro'}"></md-icon>
+            </md-list-item>
+            <md-list class="animate-slide-up" ng-show="imenu=='financeiro'">
+                <md-list-item ng-repeat="menu in menu.financeiro" ui-sref="{{menu.link}}">
+                    <p class="sublist">{{menu.nome}}</p>
+                </md-list-item>
+            </md-list>
+            <md-list-item ng-click="imenu='relatorio'">
+                <md-icon md-svg-icon="file-chart"></md-icon>
+                Relatórios
+                <span flex></span>
+                <md-icon md-svg-icon="chevron-down" class="md-toggle-icon " ng-class="{'toggled': imenu=='relatorio'}"></md-icon>
+            </md-list-item>
+            <md-list class="animate-slide-up" ng-show="imenu=='relatorio'">
+                <md-list-item ng-repeat="menu in menu.relatorio" ui-sref="{{menu.link}}">
+                    <p class="sublist">{{menu.nome}}</p>
+                </md-list-item>
+            </md-list>
+            <md-list-item ng-click="buildToggler('chat')">
+                <md-icon md-svg-icon="comment-multiple-outline"></md-icon>
+                {{panel.message}}
+                <span flex></span>
+                <md-badge class="" ng-if="(conversas | filter:{unread:true}).length>0">{{(conversas | filter:{unread:true}).length}}</md-badge>
+            </md-list-item>
+            <md-list-item ui-sref="vpad.develop" ng-if="dados.dados.desenvolvedor">
+                <md-icon md-svg-icon="code-tags"></md-icon>
+                {{panel.develop}}
+                <span flex></span>
+            </md-list-item>
+        </div>
+
+        <md-list-item ng-click="logout()">
+            <md-icon md-svg-icon="deskphone"></md-icon>
+            Suporte
+            <span flex></span>
+        </md-list-item>
+        <md-list-item ng-click="logout()">
+            <md-icon md-svg-icon="logout"></md-icon>
+            {{panel.logout}}
+            <span flex></span>
+        </md-list-item>
+    </md-list>
+</md-content>
+<md-divider inset></md-divider>
+<ng-view ui-view="subpainel"></ng-view>

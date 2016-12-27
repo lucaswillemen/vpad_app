@@ -1,0 +1,241 @@
+<div layout="column" flex class='animate-hide' ng-hide="panel">
+
+    <md-toolbar class="md-table-toolbar md-default md-tall">
+        <div class="md-toolbar-tools">
+            <h2 class="md-title">{{i18n.users.title}} </h2>
+            <div flex></div>
+            <md-button class="md-raised md-primary" aria-label="Settings" ng-click="popupAdicionar()">
+                <md-tooltip md-direction="top">{{i18n.users.add}}</md-tooltip>
+                <md-icon md-svg-icon="account-multiple-outline"></md-icon> Adicionar
+            </md-button>
+        </div>
+        <div class="md-toolbar-tools ">
+            <md-icon md-svg-icon="account-search" style="fill:#757575"></md-icon>
+            <form flex name="filter.form">
+                <md-input-container md-no-float style="padding-top:25px">
+                    <input ng-model="filter.search" class="md-dark" id="sfocus" placeholder="{{i18n.basic.search}}" flex md-autofocus>
+                </md-input-container>
+            </form>
+            <span flex></span>
+
+            <span ng-show="options.rowSelection && selected.length">{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selecionados</span>
+        </div>
+
+    </md-toolbar>
+
+
+    <md-divider></md-divider>
+
+
+    <md-toolbar ng-show="filter.show && !selected.length" class="md-table-toolbar alternate">
+        <div class="md-toolbar-tools">
+            <md-icon md-svg-icon="account-search"></md-icon>
+            <form flex name="filter.form">
+                <md-input-container md-no-float style="padding-top:25px">
+                    <input ng-model="filter.search" class="md-dark" id="sfocus" placeholder="{{i18n.basic.search}}" flex md-autofocus>
+                </md-input-container>
+            </form>
+            <md-button class="md-icon-button" ng-click="removeFilter()">
+                <i class="material-icons md-dark">close</i>
+            </md-button>
+            <md-button class="md-icon-button" aria-label="Settings" ng-click="popupaddNovo($event)">
+                <md-tooltip md-direction="top">{{i18n.users.add}}</md-tooltip>
+                <i class="material-icons md-dark">person_add</i>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+
+
+
+
+    <table md-table md-row-select="options.rowSelection" ng-model="selected" md-progress="promise_table" flex>
+        <thead fix-head md-head md-order="query.order" md-on-reorder="logOrder">
+            <tr md-row>
+                <th md-column md-order-by="dados.nome"><span>{{i18n.users.table.name}}</span></th>
+                <th hide-xs md-column md-order-by="dados.email"><span>Email</span></th>
+                <th hide-xs hide-sm md-column md-order-by="dados.cidade"><span>{{i18n.basic.city}}</span></th>
+                <th md-column md-numeric><span>{{i18n.basic.options}}</span></th>
+            </tr>
+        </thead>
+
+        <tbody md-body>
+            <tr md-row ng-repeat="dessert in desserts | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                <td md-cell>{{dessert.dados.nome}}<br><a href="tel: {{dessert.dados.celular}}">{{dessert.dados.celular}}</a></td>
+                <td md-cell hide-xs class="hid">{{dessert.dados.email}}<br><a target="_blank" href="{{dessert.dados.facebook}}">{{dessert.dados.facebook}}</a></td>
+                <td md-cell hide-sm hide-xs class="hid">{{dessert.dados.cidade}}<br>{{dessert.dados.estado}}</td>
+                <td md-cell md-numeric class="md-table-td-more">
+                    <md-menu md-position-mode="target-right target">
+                        <md-button aria-label="a" class="md-icon-button" ng-click="$mdOpenMenu(ev)">
+                            <md-icon md-svg-icon="more" style="fill:rgb(3,155,229)"></md-icon>
+                        </md-button>
+                        <md-menu-content width="4">
+                            <md-menu-item>
+                                <md-button ng-click="popupEditar($event, dessert._id)">
+                                    <md-icon md-svg-icon="pen" style="fill:rgb(3,155,229)"></md-icon>
+                                    {{i18n.basic.edit}}
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="popupExcluir($event, dessert._id)">
+                                    <md-icon md-svg-icon="delete" style="fill:rgb(3,155,229)"></md-icon>
+                                    {{i18n.basic.delete}}
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-divider></md-menu-divider>
+                            <md-menu-item>
+                                <md-button ng-click="">
+                                    <md-icon md-svg-icon="share" style="fill:rgb(3,155,229)"></md-icon>
+                                    {{i18n.basic.share}}
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <span flex></span>
+    <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{desserts.length}}" md-limit-options="[5, 10, 15, 30, 100]"></md-table-pagination>
+</div>
+
+
+
+
+
+<div id="one" class='animate-hide' ng-show="panel" ng-init="panel=false">
+    <md-toolbar class="md-table-toolbar md-default">
+        <div class="md-toolbar-tools">
+            <h2 class="md-title">{{i18n.users.add}} </h2>
+            <div flex></div>
+        </div>
+    </md-toolbar>
+    <form ng-submit="verifica()" name="formPop" id="formPop" novalidate ng-hide="cadastro2 || cadastro3" layout-padding>
+        <div flex>
+            <p>{{i18n.users.text_add1}}</p>
+            <p>{{i18n.users.text_add2}}</p>
+            <div layout-sm="column" layout="row">
+                <md-input-container flex>
+                    <label>Email</label>
+                    <input name="email" type="email" ng-model="data.dados.email" required autofocus>
+                    <div ng-messages="formPop.email.$error">
+                        <div ng-message="required">Informe o seu email.</div>
+                    </div>
+                </md-input-container>
+            </div>
+        </div>
+        <div layout="row" layout-align="center center">
+            <md-button class="md-raised" ng-click="panel=false">
+                <md-icon md-svg-icon="keyboard-backspace"></md-icon>
+                {{i18n.basic.back}}
+            </md-button>
+            <span flex></span>
+            <md-progress-circular md-mode="indeterminate" ng-show="formPop.$submitted" md-diameter="30"></md-progress-circular>
+            <md-button class="md-primary md-raised" type="submit" ng-disabled="formPop.$invalid || formPop.$submitted">{{i18n.basic.search}}</md-button>
+        </div>
+    </form>
+
+
+
+
+
+    <div ng-show="cadastro2">
+        <div style="background: url('../src/img/mdbg.jpg'); background-size:cover;">
+            <div class="md-padding" style="background-color: rgba(255,255,255,0.5);">
+                <h2 style="margin-bottom: 0px;"> {{data.dados.nome}}</h2>
+                <p style="margin-top: 0px;"> {{data.dados.email}}</p>
+            </div>
+        </div>
+        <md-list layout-padding>
+            <md-list-item class="md-2-line">
+                <md-icon md-svg-icon="map-marker">place</md-icon>
+                <div class="md-list-item-text">
+                    <h3> {{ data.dados.cidade }} </h3>
+                    <p> {{ data.dados.estado }} </p>
+                </div>
+            </md-list-item>
+            <md-list-item class="md-2-line" href="tel:{{ data.celular }}">
+                <md-icon md-svg-icon="phone"></md-icon>
+                <div class="md-list-item-text">
+                    <h3> {{ data.dados.celular }} </h3>
+                    <p> {{ data.dados.telefone }} </p>
+                </div>
+            </md-list-item>
+        </md-list>
+        <div layout-padding>
+            <div layout="row" layout-align="center center">
+                <md-button type="button" ng-click="cadastro2=false; formPop.$setPristine(); data=''">
+                    {{i18n.basic.back}}
+                </md-button>
+                <span flex></span>
+                <md-progress-circular md-mode="indeterminate" ng-show="addload" md-diameter="20"></md-progress-circular>
+                <md-button class="md-primary md-raised" type="button" ng-hide="jaexiste" ng-click="addUsuario()">
+                    <span>  {{i18n.basic.add}} </span>
+                </md-button>
+                <md-button class="md-primary md-raised" type="button" ng-show="jaexiste" ng-disabled="jaexiste">
+                    <span>  Já vinculado </span>
+                </md-button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <form ng-submit="novoUsuario()" name="formPop2" novalidate ng-show="cadastro3" layout-padding>
+        <div class="md-dialog-content">
+            <p>{{i18n.customers.text_add6}}</p>
+            <div layout="row" layout-xs="column">
+                <md-input-container flex>
+                    <label>Nome</label>
+                    <input name="nome" type="text" ng-model="data.dados.nome" required>
+                    <div ng-messages="formPop2.nome.$error">
+                        <div ng-message="required">Informe o nome do usuário.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>CPF</label>
+                    <input name="cpf" type="text" ng-model="data.dados.cpf" ui-br-cpfcnpj-mask>
+                </md-input-container>
+            </div>
+            <div layout layout="row" layout-xs="column">
+                <md-input-container flex>
+                    <label>Celular</label>
+                    <input name="celular" type="text" ng-model="data.dados.celular" ui-br-phone-number>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Cidade</label>
+                    <input name="cidade" type="text" ng-model="data.dados.cidade">
+                </md-input-container>
+            </div>
+            <p>{{i18n.customers.text_add5}}</p>
+            <div layout layout="row" layout-xs="column">
+                <md-input-container flex>
+                    <label>Email</label>
+                    <input name="email" type="email" ng-model="data.dados.email" readonly>
+                    <div ng-messages="formPop2.email.$error">
+                        <div ng-message="required">Informe o seu email.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Senha</label>
+                    <input name="senha" type="password" ng-model="data.dados.senha">
+                    <div ng-messages="formPop2.senha.$error">
+                        <div ng-message="required">Informe a senha do usuário.</div>
+                    </div>
+                </md-input-container>
+            </div>
+        </div>
+        <div layout="row" layout-align="center center">
+            <md-button type="button" ng-click="cadastro3=false; formPop.$setPristine();">
+                {{i18n.basic.back}}
+            </md-button>
+            <span flex></span>
+            <md-progress-circular md-mode="indeterminate" ng-show="formPop2.$submitted" md-diameter="20"></md-progress-circular>
+            <md-button class="md-primary md-raised" type="submit" ng-disabled="formPop2.$invalid || formPop2.$submitted">
+                <span ng-hide="formPop3.$submitted">  {{i18n.basic.add}} </span>
+            </md-button>
+        </div>
+    </form>
+</div>

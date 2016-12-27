@@ -1,0 +1,51 @@
+<md-dialog flex-xs="95" flex-sm="80" flex-md="60" flex-lg="60">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>
+          <span>Acessar conta</span>
+        </h2>
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="More">
+                <md-icon md-svg-icon="close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <div ng-hide="pload" class="md-padding">
+        <p>Informe os seus dados de acesso ao sistema</p>
+        <form name="loginform" ng-submit="login()">
+            <md-input-container class="md-block" layout-align="center end">
+                <input ng-model="data_login.email" type="email" placeholder="Email" autofocus name="email" required>
+                <div ng-messages="loginform.email.$error">
+                    <div ng-message="required">Informe o seu email.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" layout-align="center end">
+                <input ng-model="data_login.senha" type="password" placeholder="Senha" autofocus name="senha" required>
+                <div ng-messages="loginform.senha.$error">
+                    <div ng-message="required">Informe o sua senha.</div>
+                </div>
+            </md-input-container>
+            <div layout="row" layout-align="end center">
+                <md-progress-circular md-mode="indeterminate" ng-show="loginform.$submitted" md-diameter="20"></md-progress-circular>
+                <md-button type="submit" class="md-raised md-primary" ng-disabled="loginform.$invalid || loginform.$submitted">
+                    Entrar
+                </md-button>
+            </div>
+        </form>
+    </div>
+    <div ng-show="pload">
+        <div class="md-padding">
+            <p>Selecione uma empresa para se conectar</p>
+        </div>
+        <md-list>
+            <md-list-item class="md-2-line" ng-repeat="empresas in empresas" ng-click="autorizar(empresas.eid)">
+                <md-icon md-svg-icon="city">business</md-icon>
+                <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                    <h3> {{ empresas.nome }} </h3>
+                    <p> {{ empresas.cidade }} </p>
+                </div>
+            </md-list-item>
+        </md-list>
+        <md-progress-linear md-mode="indeterminate" ng-show="barload" style="position: fixed;bottom: 0;"></md-progress-linear>
+    </div>
+</md-dialog>

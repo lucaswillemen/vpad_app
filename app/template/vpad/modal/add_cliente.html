@@ -1,0 +1,140 @@
+<style type="text/css">
+   .perfilimg{
+   width: 20%;
+   /* padding: 20px; */
+   margin: 20px;
+   margin-bottom: 0px;
+   border: white;
+   border-style: solid;
+   border-radius: 50%;}  
+</style>
+<md-dialog  flex-xs="95" flex-sm="80" flex-md="60" flex-lg="60" layout="column" style="z-index: 99999">
+   <md-toolbar >
+      <div class="md-toolbar-tools">
+         <h2>{{text.customers.add}}</h2>
+         <span flex></span>
+         <md-button class="md-icon-button" ng-click="cancel()" aria-label="cancel">
+            <md-icon md-svg-icon="close">
+         </md-button>
+      </div>
+   </md-toolbar>
+   <form ng-submit="verifica()" name="formPop" id="formPop" novalidate ng-hide="cadastro2 || cadastro3">
+      <md-content class="md-dialog-content" flex>
+         <p>{{text.customers.text_add1}}</p>
+         <p>{{text.customers.text_add2}}</p>
+         <p>{{text.customers.text_add3}}</p>
+         <div layout-sm="column" layout="row">
+            <md-input-container flex>
+               <label>Email</label>
+               <input name="email" type="email" ng-model="data.dados.email" required autofocus>
+               <div ng-messages="formPop.email.$error">
+                  <div ng-message="required">Informe o seu email.</div>
+               </div>
+            </md-input-container>
+         </div>
+      </md-content>
+      <md-dialog-actions>
+         <span flex></span>
+         <md-progress-circular md-mode="indeterminate" ng-show="formPop.$submitted" md-diameter="20"></md-progress-circular>
+         <md-button class="md-primary md-raised" type="submit"  ng-disabled="formPop.$invalid || formPop.$submitted">
+            <span ng-hide="formPop.$submitted">  {{text.basic.search}} </span>
+         </md-button>
+      </md-dialog-actions>
+   </form>
+   <div ng-show="cadastro2">
+   
+      <div  style="background: url('../src/img/mdbg.jpg'); background-size:cover;">
+         <div layout-gt-sm="row">
+            <div>
+               <img src="https://cdn3.iconfinder.com/data/icons/rcons-user-action/32/boy-512.png" class="perfilimg" >
+            </div>
+            <div>
+            </div>
+         </div>
+         <div class="md-padding" style="background-color: rgba(255,255,255,0.5);">
+            <h2 style="margin-bottom: 0px;"> {{data.dados.nome}}</h2>
+            <p  style="margin-top: 0px;"> {{data.dados.email}}</p>
+         </div>
+      </div>
+
+      <md-list>
+         <md-list-item class="md-2-line" >
+            <md-icon md-svg-icon="map-marker">place</md-icon>
+            <div class="md-list-item-text" >
+               <h3> {{ data.dados.cidade }} </h3>
+               <p> {{ data.dados.estado }} </p>
+            </div>
+         </md-list-item>
+         <md-list-item class="md-2-line" href="tel:{{ data.celular }}">
+            <md-icon md-svg-icon="phone"></md-icon>
+            <div class="md-list-item-text">
+               <h3> {{ data.dados.celular }} </h3>
+               <p> {{ data.dados.telefone }} </p>
+            </div>
+         </md-list-item>
+      </md-list>      
+      <md-dialog-actions>
+      <span flex></span>
+         <md-button type="button" ng-click="cadastro2=false; formPop.$setPristine(); data=''">
+            {{text.basic.back}}
+         </md-button>
+         
+         <md-progress-circular md-mode="indeterminate" ng-show="addload" md-diameter="20">
+         </md-progress-circular>
+         <md-button class="md-primary md-raised" type="button" ng-hide="jaexiste" ng-click="addCliente()">
+            <span>  {{text.basic.add}} </span>            
+         </md-button>
+         <md-button class="md-primary md-raised" type="button" ng-show="jaexiste"  ng-disabled="jaexiste">
+          <span>  Já vinculado </span>        
+          </md-button>
+      </md-dialog-actions>
+   </div>
+   <form ng-submit="novoCliente()" name="formPop2" novalidate ng-show="cadastro3">
+         <md-content class="md-dialog-content">
+            <p>{{text.customers.text_add6}}</p>
+            <div layout="row" layout-xs="column">
+               <md-input-container flex>
+                  <label>Nome</label>
+                  <input name="nome" type="text" ng-model="data.dados.nome" required>
+                  <div ng-messages="formPop2.nome.$error">
+                     <div ng-message="required">Informe o nome do cliente.</div>
+                  </div>
+               </md-input-container>
+               <md-input-container flex>
+                  <label>CPF</label>
+                  <input name="cpf" type="text" ng-model="data.dados.cpf" ui-br-cpfcnpj-mask>
+               </md-input-container>
+            </div>
+            <div layout layout="row" layout-xs="column">
+               <md-input-container flex>
+                  <label>Celular</label>
+                  <input name="celular" type="text" ng-model="data.dados.celular" ui-br-phone-number>
+               </md-input-container>
+               <md-input-container flex>
+                  <label>Cidade</label>
+                  <input name="cidade" type="text" ng-model="data.dados.cidade">
+               </md-input-container>
+            </div>
+         <p>{{text.customers.text_add5}}</p>
+         <div layout layout="row" layout-xs="column" >
+            <md-input-container flex>
+               <label>Email</label>
+               <input name="email" type="email" ng-model="data.dados.email" readonly>
+               <div ng-messages="formPop2.email.$error">
+                  <div ng-message="required">Informe o seu email.</div>
+               </div>
+            </md-input-container>
+         </div>
+      </md-content>
+      <md-dialog-actions >
+        <md-button type="button" ng-click="cadastro3=false; formPop.$setPristine();">
+            {{text.basic.back}}
+         </md-button>
+         <span flex></span>
+         <md-progress-circular md-mode="indeterminate" ng-show="formPop2.$submitted" md-diameter="20"></md-progress-circular>
+         <md-button class="md-primary md-raised" type="submit"  ng-disabled="formPop2.$invalid || formPop2.$submitted">
+            <span ng-hide="formPop3.$submitted">  {{text.basic.add}} </span>
+         </md-button>
+      </md-dialog-actions>
+   </form>
+</md-dialog>

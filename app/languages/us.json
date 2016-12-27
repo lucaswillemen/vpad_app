@@ -1,0 +1,248 @@
+"en": {
+            "currency": "$ ",
+            "ad": "Learn about the updates on our website",
+            "menu": {
+                "registers": {
+                    "name": "REGISTERS",
+                    "customer": "Customers",
+                    "product": "Products",
+                    "service": "Services",
+                    "vendor": "Vendors",
+                    "carrier": "Carriers"
+                },
+                "operational": {
+                    "name": "OPERATIONAL",
+                    "saler": "Sales",
+                    "purchases": "Purchases",
+                    "service": "Services",
+                    "os": "Work Order",
+                    "budget": "Budget",
+                    "pos": "POS"
+                },
+                "control": {
+                    "name": "CONTROLS",
+                    "users": "Users",
+                    "company": "Businesses",
+                    "partner": "Partners",
+                    "inventory": "Inventory"
+                },
+                "accounting": {
+                    "name": "ACCOUNTING",
+                    "topay": "Bills to pay",
+                    "toreceive": "Bills to receive",
+                    "flux": "Cash flow"
+                },
+                "report": {
+                    "name": "REPORTS",
+                    "customer": "Registered customers",
+                    "product": "Product inventory",
+                    "service": "Services performed",
+                    "cash": "Cash flow",
+                    "account": "Moving accounts",
+                    "sales": "Sales report"
+                }
+            },
+            "painel": {
+                "panel": {
+                    "feedback": "Feedback",
+                    "contact": "Contacts",
+                    "fast": "Fast seller",
+                    "logout": "Logout",
+                    "country": {
+                        "name": "Brasil",
+                        "link": "pt"
+                    }
+                }
+            },
+            "subpainel": {
+                "panel": {
+                    "pay": "Bills to pay",
+                    "receive": "Bills to receive",
+                    "revenue": "Monthly revenue",
+                    "expense": "Monthly expense",
+                    "cashier": "Cashier",
+                    "forecasting": "Cash forecasting",
+                    "vital": "Vital flow",
+                }
+            },
+            "home": {
+                "text": {
+                    "one": "Cash flow evolution",
+                    "two": "New customers registered",
+                    "three": "Inventory movement",
+                    "four": "Customers who spent more",
+                    "five": "Customers who bought more",
+                    "six": "Customers more timely payments",
+                    "seven": "Customers with higher default",
+                    "recipe": "Recipe",
+                    "expense": "Expense",
+                    "cashier": "Cashier",
+                }
+            },
+            "customers": {
+                "title": "Customers",
+                "add": "Add new customer",
+                "text_add1": "Sign the email account so that it can have exclusive access to our APP",
+                "text_add2": "If the client you are already registered , all information will be automatically loaded",
+                "text_add3": "If you do not bind the customer to the external access, click skip",
+                "text_sync1": "This email is already registered in our system.",
+                "text_sync2": "Check out the information and click add.",
+                "text_sync3": "You can complete the registration of this client after.",
+                "text_sync4": "This email is not registered.",
+                "text_sync5": "Create a new account for that client.",
+                "edit": {
+                    "tab_1": "basic information",
+                    "tab_2": "additional data",
+                    "tab_3": "localization",
+                },
+                "delet": {
+                    "confirm": "Are you sure you want to delete this customer?",
+                    "text": "You will be able recurar the record after."
+                },
+                "fields": {
+                    "profession": "Profession",
+                    "education": "Education",
+                    "cpf": "Social Security Number",
+                    "rg": "Identity document",
+                    "state": "Country",
+                    "street": "Street",
+                    "zip": "ZIP Code",
+                    "number": "Number",
+                    "neighborhood": "Neighborhood",
+                    "sex": "Sex",
+                    "birth": "Birth"
+                },
+                "table": {
+                    "name": "Customers name"
+                }
+            },
+            "products": {
+                "title": "Products",
+                "add": "Add new product",
+                "edit": {
+                    "tab_1": "basic information",
+                    "tab_2": "additional data",
+                    "tab_3": "purchase information",
+                    "tab_4": "informações fiscais",
+                    "tab_5": "informações tributáveis",
+                },
+                "delet": {
+                    "confirm": "Are you sure you want to delete this product?",
+                    "text": "You will be able recurar the record after."
+                },
+                "fields": {
+                    "name": "Product name",
+                    "price": "Sale price",
+                    "codbarras": "Bar code",
+                    "pricesell": "Sale price",
+                    "pricebuy": "Buy price",
+                    "qntd": "Amount",
+                    "brand": "Brand",
+                    "model": "Model",
+                    "vendor": "Vendor",
+                    "carrier": "Carrier",
+                    "ncm": "Código NCM",
+                    "cfop": "Código CFOP",
+                    "valor_tri": "Valor tributável",
+                    "icms_origem": "ICMS de origem",
+                    "icms_tribu": "ICMS Tribuável",
+                    "icms_aliquota": "Aliquota",
+                    "unitri": "Unidade tribuável",
+                    "unicom": "Unidade comercial"
+
+
+                },
+                "table": {
+                    "name": "Product name",
+                    "price": "Sale price",
+                    "qntd": "Amount",
+                }
+            },
+            "services": {
+                "title": "Services",
+                "add": "Add new service",
+                "delet": {
+                    "confirm": "Are you sure you want to delete this service?",
+                    "text": "You will be able recurar the record after."
+                },
+                "fields": {
+                    "name": "Service name",
+                    "price": "Price",
+                    "buyer": "Coust",
+                    "time": "Time",
+
+                },
+                "table": {
+                    "name": "Service name",
+                    "price": "Price",
+                }
+            },
+            "vendors": {
+                "title": "Vendors",
+                "add": "Add new vendor",
+                "delet": {
+                    "confirm": "Are you sure you want to delete this vendor?",
+                    "text": "You will be able recurar the record after."
+                },
+                "fields": {
+                    "name": "Vendor name",
+                    "contact": "Contact",
+                    "site": "Website",
+
+                }
+            },
+            "carriers": {
+                "title": "Carriers",
+                "add": "Add new vendor",
+                "delet": {
+                    "confirm": "Are you sure you want to delete this carrier?",
+                    "text": "You will be able recurar the record after."
+                },
+                "fields": {
+                    "name": "Carrier name",
+                    "contact": "Contact",
+                    "site": "Website",
+
+                }
+            },
+            "basic": {
+                "name": "Name",
+                "city": "City",
+                "email": "Email",
+                "cell": "Cell",
+                "phone": "Phone",
+                "options": "Options",
+                "delete": "Delete",
+                "edit": "Edit",
+                "new": "New",
+                "share": "Share",
+                "cancel": "Cancel",
+                "save": "Save",
+                "confirm": "Confirm",
+                "search": "Search",
+                "next": "Next",
+                "skip": "Skip",
+                "add": "Add",
+                "back": "Back",
+                "password": "Password",
+                "masc": "Male",
+                "fem": "Female",
+                "category": "Category",
+                "desc": "Description",
+                "selected": "Selected",
+                "line": "Line",
+                "lines": "Lines",
+                "type": "Type",
+                "delet": {
+                    "confirm": "Are you sure you want to delete this register?",
+                    "text": "You will be able recurar the record after."
+                },
+
+                "made": "Made",
+                "purchases": "Purchases",
+                "spent": "Spent",
+                "cur": "Dolar",
+                "paid": "Paid",
+                "overdue": "Overdue bills"
+            }
+        }

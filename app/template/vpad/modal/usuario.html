@@ -1,0 +1,159 @@
+<md-dialog flex-xs="95" flex-sm="80" flex-md="60" flex-lg="60" flex-xl="50">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Editar Usuário</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-icon="close">
+            </md-button>
+        </div>
+    </md-toolbar>
+    <form ng-submit="AtualizarUsuario()" name="formUpdate" id="formUpdate">
+        <md-content>
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="{{text.customers.edit.tab_1}}">
+                    <md-content class="md-padding">
+                        <div layout-gt-sm="row">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>{{text.basic.name}}</label>
+                                <input ng-model="form.data.dados.nome" required>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Email</label>
+                                <input ng-model="form.data.dados.email">
+                            </md-input-container>
+                        </div>
+                        <div layout-gt-sm="row">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Facebook</label>
+                                <input ng-model="form.data.dados.facebook">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Google+</label>
+                                <input ng-model="form.data.dados.google">
+                            </md-input-container>
+                        </div>
+                        <div layout-gt-sm="row">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Senha</label>
+                                <input ng-model="form.data.dados.senha" type="password">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>{{text.basic.cell}}</label>
+                                <input type="text" ng-model="form.data.dados.celular" ui-br-phone-number>
+                            </md-input-container>
+                        </div>
+                    </md-content>
+                </md-tab>
+                <md-tab label="{{text.customers.edit.tab_2}}">
+                    <md-content class="md-padding">
+                        <div layout-gt-sm="row">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>{{text.customers.fields.cpf}}</label>
+                                <input ng-model="form.data.dados.cpfcnpj" ui-br-cpfcnpj-mask>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>{{text.customers.fields.rg}}</label>
+                                <input ng-model="form.data.dados.rgie">
+                            </md-input-container>
+                        </div>
+                        <div layout-gt-sm="row">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>{{text.customers.fields.profession}}</label>
+                                <input ng-model="form.data.dados.profissao">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>{{text.customers.fields.education}}</label>
+                                <input ng-model="form.data.dados.profissao">
+                            </md-input-container>
+                        </div>
+                        <div layout-gt-sm="row">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>{{text.customers.fields.sex}}</label>
+                                <md-select ng-model="form.data.dados.sexo" placeholder="{{text.customers.fields.sex}}">
+                                    <md-option value="M">{{text.basic.masc}}</md-option>
+                                    <md-option value="F">{{text.basic.fem}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-datepicker flex style="margin-right: 0px;" ng-model="form.data.dados.nascimento" md-placeholder="{{text.customers.fields.birth}}">{{text.customers.fields.birth}}</md-datepicker>
+                        </div>
+                    </md-content>
+                </md-tab>
+                <md-tab label="{{text.customers.edit.tab_3}}">
+                    <md-content class="md-padding">
+                        <div layout-gt-sm="row">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>{{text.customers.fields.zip}}</label>
+                                <input ng-model="form.data.dados.cep" ng-blur="cep()" ui-br-cep-mask>
+                            </md-input-container>
+                            <md-input-container class="md-block md-fix-select" flex-gt-sm>
+                                <label>{{text.customers.fields.state}}</label>
+                                <md-select ng-model="form.data.dados.estado" placeholder="{{text.customers.fields.state}}">
+                                    <md-option value="AC">Acre</md-option>
+                                    <md-option value="AL">Alagoas</md-option>
+                                    <md-option value="AP">Amapá</md-option>
+                                    <md-option value="AM">Amazonas</md-option>
+                                    <md-option value="BA">Bahia</md-option>
+                                    <md-option value="CE">Ceará</md-option>
+                                    <md-option value="DF">Distrito Federal</md-option>
+                                    <md-option value="ES">Espirito Santo</md-option>
+                                    <md-option value="GO">Goiás</md-option>
+                                    <md-option value="MA">Maranhão</md-option>
+                                    <md-option value="MS">Mato Grosso do Sul</md-option>
+                                    <md-option value="MT">Mato Grosso</md-option>
+                                    <md-option value="MG">Minas Gerais</md-option>
+                                    <md-option value="PA">Pará</md-option>
+                                    <md-option value="PB">Paraíba</md-option>
+                                    <md-option value="PR">Paraná</md-option>
+                                    <md-option value="PE">Pernambuco</md-option>
+                                    <md-option value="PI">Piauí</md-option>
+                                    <md-option value="RJ">Rio de Janeiro</md-option>
+                                    <md-option value="RN">Rio Grande do Norte</md-option>
+                                    <md-option value="RS">Rio Grande do Sul</md-option>
+                                    <md-option value="RO">Rondônia</md-option>
+                                    <md-option value="RR">Roraima</md-option>
+                                    <md-option value="SC">Santa Catarina</md-option>
+                                    <md-option value="SP">São Paulo</md-option>
+                                    <md-option value="SE">Sergipe</md-option>
+                                    <md-option value="TO">Tocantins</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div layout-gt-sm="row">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>{{text.basic.city}}</label>
+                                <input ng-model="form.data.dados.cidade">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>{{text.customers.fields.neighborhood}}</label>
+                                <input ng-model="form.data.dados.bairro">
+                            </md-input-container>
+                        </div>
+                        <div layout-gt-sm="row">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>{{text.customers.fields.street}}</label>
+                                <input ng-model="form.data.dados.logradouro ">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>{{text.customers.fields.number}}</label>
+                                <input ng-model="form.data.dados.numero">
+                            </md-input-container>
+                        </div>
+                    </md-content>
+                </md-tab>
+                <md-tab label="">
+               </md-tab>
+            </md-tabs>
+        </md-content>
+        <md-dialog-actions layout="row">
+            <md-button class="" type='button' ng-click="cancel()" aria-label="cancel">
+                {{text.basic.cancel}}
+            </md-button>
+            <span flex></span>
+            <md-progress-circular md-mode="indeterminate" ng-show="formUpdate.$submitted" md-diameter="20"></md-progress-circular>
+            <md-button class="md-primary md-raised" type="submit" ng-disabled="formUpdate.$invalid || formUpdate.$submitted">
+                {{text.basic.save}}
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

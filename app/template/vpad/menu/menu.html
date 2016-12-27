@@ -1,0 +1,164 @@
+<div class="md-toolbar-tools notprint">
+   <md-button ng-click="buildToggler('painelprincipal')"  class="navbar-toggle ihid md-icon-button" aria-label="btncasd" hide-gt-sm>
+      
+            <md-icon md-svg-icon="menu"></md-icon>
+   </md-button>
+   <md-button class="md-icon-button" ui-sref="vpad.cliente">      
+            <md-icon md-svg-icon="account-multiple-outline" ></md-icon>
+        <md-tooltip md-direction="bottom">Clientes</md-tooltip>
+   </md-button>
+   <md-button class="md-icon-button" ui-sref="vpad.pdv">      
+            <md-icon md-svg-icon="cart-plus" ></md-icon>
+        <md-tooltip md-direction="bottom">PDV</md-tooltip>
+   </md-button>
+   <md-button class="md-icon-button" ui-sref="vpad.os">      
+            <md-icon md-svg-icon="worker" ></md-icon>
+        <md-tooltip md-direction="bottom">OS</md-tooltip>
+   </md-button>
+   <div class="hid" hide-gt-sm>
+      <!--<md-menu>
+         <md-button class="md-icon-button" ng-click="$mdOpenMenu()">
+            <md-icon class="material-icons">menu</md-icon>
+         </md-button>
+         <md-menu-content>
+            <md-menu-item class="md-indent" ng-repeat="m in menu.cadastro">
+               <md-button aria-label="{{m.link}}" ui-sref="vpad/{{m.link}}">
+                  <md-icon class="material-icons">{{m.ico}}</md-icon>
+                  {{m.nome}}
+               </md-button>
+            </md-menu-item>
+         </md-menu-content>
+      </md-menu>
+      <md-menu>
+         <md-button class="md-icon-button" ng-click="$mdOpenMenu()">
+            <md-icon class="material-icons">shuffle</md-icon>
+         </md-button>
+         <md-menu-content>
+            <md-menu-item ng-repeat="m in menu.operacional">
+               <md-button aria-label="{{m.link}}" ui-sref="vpad/{{m.link}}">
+                  <md-icon class="material-icons" >{{m.ico}}</md-icon>
+                  {{m.nome}}
+               </md-button>
+            </md-menu-item>
+         </md-menu-content>
+      </md-menu>
+      <md-menu >
+         <md-button class="md-icon-button" ng-click="$mdOpenMenu()">
+            <md-icon class="material-icons">settings</md-icon>
+         </md-button>
+         <md-menu-content>
+            <md-menu-item ng-repeat="m in menu.controle">
+               <md-button aria-label="{{m.link}}" ui-sref="vpad/{{m.link}}">
+                  <md-icon class="material-icons" >{{m.ico}}</md-icon>
+                  {{m.nome}}
+               </md-button>
+            </md-menu-item>
+         </md-menu-content>
+      </md-menu>
+      <md-menu >
+         <md-button class="md-icon-button" ng-click="$mdOpenMenu()">
+            <md-icon class="material-icons">attach_money</md-icon>
+         </md-button>
+         <md-menu-content>
+            <md-menu-item ng-repeat="m in menu.financeiro">
+               <md-button aria-label="{{m.link}}" ui-sref="vpad/{{m.link}}">
+                  <md-icon class="material-icons">{{m.ico}}</md-icon>
+                  {{m.nome}}
+               </md-button>
+            </md-menu-item>
+         </md-menu-content>
+      </md-menu>
+      <md-menu >
+         <md-button class="md-icon-button" ng-click="$mdOpenMenu()">
+            <md-icon class="material-icons">attach_file</md-icon>
+         </md-button>
+         <md-menu-content>
+            <md-menu-item ng-repeat="m in menu.relatorio">
+               <md-button aria-label="{{m.link}}" ui-sref="vpad/{{m.link}}">
+                  <md-icon class="material-icons">{{m.ico}}</md-icon>
+                  {{m.nome}}
+               </md-button>
+            </md-menu-item>
+         </md-menu-content>
+      </md-menu>-->
+   </div>
+   <div class="hid" hide-sm hide-xs>
+      <!--<md-menu>
+         <md-button ng-click="$mdOpenMenu()">
+            <md-icon class="material-icons">menu</md-icon>
+            <span hide-xs> {{menu.cadastro.nome}}</span>
+         </md-button>
+         <md-menu-content>
+            <md-menu-item class="md-indent" ng-repeat="m in menu.cadastro">
+               <md-button aria-label="{{m.link}}" ui-sref="vpad/{{m.link}}">
+                  <md-icon class="material-icons">{{m.ico}}</md-icon>
+                  {{m.nome}}
+               </md-button>
+            </md-menu-item>
+         </md-menu-content>
+      </md-menu>
+      <md-menu>
+         <md-button ng-click="$mdOpenMenu()">
+            <md-icon class="material-icons">shuffle</md-icon>
+            {{menu.operacional.nome}}
+         </md-button>
+         <md-menu-content>
+            <md-menu-item ng-repeat="m in menu.operacional">
+               <md-button aria-label="{{m.link}}" ui-sref="vpad/{{m.link}}">
+                  <md-icon class="material-icons" >{{m.ico}}</md-icon>
+                  {{m.nome}}
+               </md-button>
+            </md-menu-item>
+         </md-menu-content>
+      </md-menu>
+      <md-menu>
+         <md-button ng-click="$mdOpenMenu()">
+            <md-icon class="material-icons">settings</md-icon>
+            <span hide-xs>
+            {{menu.controle.nome}}</span>
+         </md-button>
+         <md-menu-content>
+            <md-menu-item ng-repeat="m in menu.controle">
+               <md-button aria-label="{{m.link}}" ui-sref="vpad/{{m.link}}">
+                  <md-icon class="material-icons" >{{m.ico}}</md-icon>
+                  {{m.nome}}
+               </md-button>
+            </md-menu-item>
+         </md-menu-content>
+      </md-menu>
+      <md-menu >
+         <md-button ng-click="$mdOpenMenu()">
+            <md-icon class="material-icons">attach_money</md-icon>
+            <span hide-xs>
+            {{menu.financeiro.nome}}</span>
+         </md-button>
+         <md-menu-content>
+            <md-menu-item ng-repeat="m in menu.financeiro">
+               <md-button aria-label="{{m.link}}" ui-sref="vpad/{{m.link}}">
+                  <md-icon class="material-icons">{{m.ico}}</md-icon>
+                  {{m.nome}}
+               </md-button>
+            </md-menu-item>
+         </md-menu-content>
+      </md-menu>
+      <md-menu >
+         <md-button ng-click="$mdOpenMenu()">
+            <md-icon class="material-icons">attach_file</md-icon>
+            {{menu.relatorio.nome}}
+         </md-button>
+         <md-menu-content>
+            <md-menu-item ng-repeat="m in menu.relatorio">
+               <md-button aria-label="{{m.link}}" ui-sref="vpad/{{m.link}}">
+                  <md-icon class="material-icons">{{m.ico}}</md-icon>
+                  {{m.nome}}
+               </md-button>
+            </md-menu-item>
+         </md-menu-content>
+      </md-menu>-->
+   </div>
+   <span flex></span>
+   <md-button class="md-btn-badge" ng-click="buildToggler('feedback'); leratividade()" aria-label="btncasd">
+      <md-icon md-svg-icon="comment-alert-outline"></md-icon>
+      <md-badge ng-if="atividade.count+alerta.count>0">{{atividade.count+alerta.count}}</md-badge>
+   </md-button>
+</div>

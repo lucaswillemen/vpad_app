@@ -1,0 +1,164 @@
+<div layout="column" flex class='animate-hide' ng-hide="panel">
+   <md-toolbar class="md-table-toolbar md-default md-tall" >
+      <div class="md-toolbar-tools">
+         <h2 class="md-title">{{i18n.vendors.title}} </h2>
+         <div flex></div>
+         <md-button class="md-raised md-primary" aria-label="Settings" ng-click="popupAdicionar()">
+            <md-tooltip md-direction="top">{{i18n.basic.add}}</md-tooltip>
+            <md-icon md-svg-icon="plus"></md-icon>
+            <span style="color:white">{{i18n.basic.add}}</span>
+         </md-button>
+      </div>
+      <div class="md-toolbar-tools ">
+         <md-icon md-svg-icon="account-search" style="fill:#757575"></md-icon>
+         <form flex name="filter.form">
+            <md-input-container md-no-float style="padding-top:25px">
+               <input ng-model="filter.search" class="md-dark" id="sfocus" placeholder="{{i18n.basic.search}}" flex md-autofocus>
+            </md-input-container>
+         </form>
+         <span flex></span>
+         <span ng-show="options.rowSelection && selected.length">{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selecionados</span>
+      </div>
+   </md-toolbar>
+   <table md-table md-row-select="options.rowSelection" ng-model="selected" md-progress="promise_table" flex>
+      <thead fix-head md-head md-order="query.order" md-on-reorder="logOrder">
+         <tr md-row>
+            <th md-column md-order-by="dados.nome"><span>{{i18n.vendors.table.name}}</span></th>
+            <th hide-xs  md-column md-order-by="dados.price"><span>{{i18n.vendors.table.contact}}</span></th>
+            <th hide-xs hide-sm  md-column md-order-by="dados.price"><span>Email</span></th>
+            <th md-column md-numeric><span>{{i18n.basic.options}}</span></th>
+         </tr>
+      </thead>
+      <tbody md-body>
+         <tr md-row md-select="dessert" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="dessert in desserts | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+            <td md-cell>{{dessert.dados.nome}}<br><a href="tel: {{dessert.dados.celular}}">{{dessert.dados.marca}}</a></td>
+            <td md-cell hide-xs>{{dessert.dados.contact}}<br><a href="tel: {{dessert.dados.cell_contact}}">{{dessert.dados.cell_contact}}</a></td>
+            <td md-cell hide-sm  hide-xs class="hid">{{dessert.dados.email}}</td>
+            <td md-cell md-numeric class="md-table-td-more">
+               <md-menu md-position-mode="target-right target">
+                  <md-button aria-label="a" class="md-icon-button" ng-click="$mdOpenMenu($event)" >
+                     <md-icon md-svg-icon="more" style="fill:rgb(3,155,229)"></md-icon>
+                  </md-button>
+                  <md-menu-content width="4">
+                     <md-menu-item>
+                        <md-button ng-click="popupEditar($event, dessert._id)">
+                           <md-icon md-svg-icon="pen" style="fill:rgb(3,155,229)"></md-icon>
+                           {{i18n.basic.edit}}
+                        </md-button>
+                     </md-menu-item>
+                     <md-menu-item>
+                        <md-button ng-click="popupExcluir($event, dessert._id)">
+                           <md-icon md-svg-icon="delete" style="fill:rgb(3,155,229)"></md-icon>
+                           {{i18n.basic.delete}}
+                        </md-button>
+                     </md-menu-item>
+                  </md-menu-content>
+               </md-menu>
+            </td>
+         </tr>
+      </tbody>
+   </table>
+   <span flex></span>
+   <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{desserts.length}}" md-limit-options="[5, 10, 15, 30, 100]" ></md-table-pagination>
+</div>
+<div id="one" class='animate-hide' ng-show="panel"  ng-init="panel=false">
+   <form name="vendorForm" ng-submit="cadastrar()" novalidade>
+      
+      <div layout-padding layout="row" layout-xs="column">
+         <fieldset flex>
+            <legend>{{i18n.vendors.legends.first}}</legend>
+            <md-input-container class="md-block" flex-gt-sm>
+               <label>{{i18n.vendors.fields.name}}</label>
+               <input ng-model="data.dados.nome" name="name" required>
+               <div ng-messages="vendorForm.name.$error">
+                  <div ng-message="required">Informe o nome do serviço.</div>
+               </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+               <label>{{i18n.basic.business_id}}</label>
+               <input ng-model="data.dados.business_id" >
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+               <label>{{i18n.basic.phone}}</label>
+               <input ng-model="data.dados.phone" >
+            </md-input-container>
+            <md-input-container class="md-block"  flex-gt-sm>
+               <label>{{i18n.vendors.fields.contact}}</label>
+               <input ng-model="data.dados.contact" >
+            </md-input-container>
+            <md-input-container class="md-block"  flex-gt-sm>
+               <label>{{i18n.vendors.fields.cell_contact}}</label>
+               <input ng-model="data.dados.cell_contact"  >
+            </md-input-container>
+            <md-input-container class="md-block"  flex-gt-sm>
+               <label>Email</label>
+               <input ng-model="data.dados.email"  >
+            </md-input-container>
+         </fieldset>
+         <fieldset flex>
+            <legend>{{i18n.vendors.legends.second}}</legend>
+            <md-input-container class="md-block" flex-gt-sm>
+                        <label>{{i18n.customers.fields.zip}}</label>
+                        <input ng-model="form.data.dados.cep"  ng-blur="ConsultaCEP()">
+                     </md-input-container>
+                     <md-input-container class="md-block md-fix-select" flex-gt-sm>
+                        <label>{{i18n.customers.fields.state}}</label>
+                        <md-select ng-model="form.data.dados.estado" placeholder="{{i18n.customers.fields.state}}">
+                           <md-option value="AC">Acre</md-option>
+                           <md-option value="AL">Alagoas</md-option>
+                           <md-option value="AP">Amapá</md-option>
+                           <md-option value="AM">Amazonas</md-option>
+                           <md-option value="BA">Bahia</md-option>
+                           <md-option value="CE">Ceará</md-option>
+                           <md-option value="DF">Distrito Federal</md-option>
+                           <md-option value="ES">Espirito Santo</md-option>
+                           <md-option value="GO">Goiás</md-option>
+                           <md-option value="MA">Maranhão</md-option>
+                           <md-option value="MS">Mato Grosso do Sul</md-option>
+                           <md-option value="MT">Mato Grosso</md-option>
+                           <md-option value="MG">Minas Gerais</md-option>
+                           <md-option value="PA">Pará</md-option>
+                           <md-option value="PB">Paraíba</md-option>
+                           <md-option value="PR">Paraná</md-option>
+                           <md-option value="PE">Pernambuco</md-option>
+                           <md-option value="PI">Piauí</md-option>
+                           <md-option value="RJ">Rio de Janeiro</md-option>
+                           <md-option value="RN">Rio Grande do Norte</md-option>
+                           <md-option value="RS">Rio Grande do Sul</md-option>
+                           <md-option value="RO">Rondônia</md-option>
+                           <md-option value="RR">Roraima</md-option>
+                           <md-option value="SC">Santa Catarina</md-option>
+                           <md-option value="SP">São Paulo</md-option>
+                           <md-option value="SE">Sergipe</md-option>
+                           <md-option value="TO">Tocantins</md-option>
+                        </md-select>
+                     </md-input-container>
+                     <md-input-container class="md-block" flex-gt-sm>
+                        <label>{{i18n.basic.city}}</label>
+                        <input ng-model="form.data.dados.cidade" >
+                     </md-input-container>
+                     <md-input-container class="md-block" flex-gt-sm>
+                        <label>{{i18n.customers.fields.neighborhood}}</label>
+                        <input ng-model="form.data.dados.bairro" >
+                     </md-input-container>
+                     <md-input-container class="md-block" flex-gt-sm>
+                        <label>{{i18n.customers.fields.street}}</label>
+                        <input ng-model="form.data.dados.logradouro " >
+                     </md-input-container>
+                     <md-input-container class="md-block" flex-gt-sm>
+                        <label>{{i18n.customers.fields.number}}</label>
+                        <input ng-model="form.data.dados.numero" >
+                     </md-input-container>
+         </fieldset>
+      </div>
+      <div layout="row" layout-align="center center">
+      <md-button type="button" class="md-raised md-block" ng-click="panel=false"> 
+         <md-icon md-svg-icon="keyboard-backspace"></md-icon>
+         {{i18n.basic.back}}
+      </md-button>
+      <span flex></span>
+         <md-progress-circular md-mode="indeterminate" ng-show="vendorForm.$submitted" md-diameter="20"></md-progress-circular>
+         <md-button type="submit" class="md-raised md-primary md-block" ng-disabled="vendorForm.$invalid || vendorForm.$submitted"> {{i18n.basic.save}}</md-button>
+      </div>
+   </form>
+</div>

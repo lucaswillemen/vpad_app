@@ -1,0 +1,18 @@
+<div layout="row" layout-fill>
+    <md-sidenav class="md-whiteframe-z2" md-component-id="painelprincipal" md-is-locked-open="$mdMedia('gt-sm')" hide-print>
+        <div ng-include="'template/vpad/panel/panel.html?1s'"></div>
+    </md-sidenav>
+    <div layout="column" flex >
+        <md-toolbar hide-print>
+            <div ng-include="'template/vpad/menu/menu.html?1a'"></div>
+        </md-toolbar>
+        <md-content layout="column" flex>
+            <div ui-view="view"></div>
+        </md-content>
+    </div>
+</div>
+
+<div ng-include="'template/vpad/sidebar/feedback.html'"></div>
+<div ng-include="'template/vpad/sidebar/contato.html'"></div>
+<div ng-include="'template/vpad/sidebar/chat.html'"></div>
+<div ng-include="'template/vpad/sidebar/conversa.html'"></div>

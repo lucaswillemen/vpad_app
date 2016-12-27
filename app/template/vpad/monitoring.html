@@ -1,0 +1,148 @@
+<style type="text/css">
+    .line {
+        border: double;
+        top: -35px;
+        width: 100%;
+        position: relative;
+        right: -50%;
+    }
+    
+    .lineh {
+        border: double;
+        top: 50px;
+        position: relative;
+        right: 38.5px;
+        min-height: 50px;
+    }
+    
+    .md-button.md-default-theme.md-raised[disabled],
+    .md-button.md-raised[disabled],
+    .md-button.md-default-theme.md-fab[disabled],
+    .md-button.md-fab[disabled] {
+        background-color: rgb(216, 216, 216);
+    }
+</style>
+<div layout="column" flex class="notprintt">
+    <md-toolbar class="md-table-toolbar md-default">
+        <div class="md-toolbar-tools">
+            <md-button class="md-raised md-primary" aria-label="Settings" ui-sref="vpad.os">
+                <md-icon md-svg-icon="keyboard-backspace"></md-icon> Voltar
+            </md-button>
+            <h2 class="md-title">Acompanhar OS</h2>
+            <div flex></div>
+            <md-button class="md-raised md-primary" aria-label="Settings" ui-sref="vpad.newservice">
+                <md-icon md-svg-icon="plus"></md-icon> Abrir nova OS
+            </md-button>
+        </div>
+        <span flex></span>
+    </md-toolbar>
+</div>
+<md-card>
+
+    <div layout-padding layout="column" layout-gt-xs="row">
+    <div flex>
+        <fieldset class="standard">
+            <legend>Informações</legend>
+            <p>
+                <md-icon md-svg-icon="account"></md-icon>
+                <span>Cliente:</span> {{data.data.cliente.dados.nome}}
+            </p>
+            <p>
+                <md-icon md-svg-icon="clock-alert"></md-icon>
+                <span>Prazo:</span> {{data.data.prazo | date: "dd/MM/yyyy"}}
+            </p>
+            <p>
+                <md-icon md-svg-icon="cash-usd	"></md-icon>
+                <span ng-show="data.data.faturamento">Faturamento: {{data.data.faturamento | date: "dd/MM/yyyy"}}</span> 
+                <span ng-show="!data.data.faturamento">Faturamento: Não faturado</span> 
+            </p>
+        </fieldset>
+        <fieldset class="standard">
+            <legend>Opções</legend>
+            <div layout="column" layout-gt-xs="row" layout-wrap flex>
+                <div flex>
+                    <md-switch ng-model="data.cb1" aria-label="Switch 1">
+                        Enviar notificações por email
+                    </md-switch>
+                    <div layout="row" layout-align="center center">
+                    <md-button class="md-raised">Faturar serviço</md-button>
+                    <md-button class="md-raised md-primary">Avançar etapa</md-button>
+                    <md-button class="md-raised md-warn">Cancelar</md-button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div flex>
+        <fieldset class="standard" flex>
+            <legend>Comentários</legend>
+        <md-list-item class="md-3-line md-long-text">
+          <img ng-src="{{todos[0].face}}?25" class="md-avatar" alt="{{todos[0].who}}" />
+          <div class="md-list-item-text">
+            <h3>Nome do comentador</h3>
+            <p>
+              Secondary line text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam massa quam.
+              Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum
+            </p>
+          </div>
+        </md-list-item>
+         <md-input-container class="md-block" style="margin-bottom: 0px;">
+          <label>Escrever novo comentário</label>
+          <textarea ng-model="user.biography" rows="2" md-select-on-focus></textarea>
+        </md-input-container>
+                    <md-button class="md-raised md-primary md-block">Publicar comentário</md-button>
+        </fieldset>
+        </div>
+    </div>
+    <div layout-align="center center" layout="column" layout-gt-xs="row" layout-padding>
+        <div flex layout-align="center center" layout-gt-xs="column" layout="row" flex style="width: 100%">
+            <span>Orçamento</span>
+            <span flex></span>
+            <md-button class="md-fab md-primary" aria-label="Eat cake">
+                <md-icon md-svg-src="calculator"></md-icon>
+            </md-button>
+            <div flex class="line" hide-xs></div>
+            <div class="lineh" hide-gt-xs></div>
+            <span style="width: 90px; text-align: center">{{data.data.dataregistro | date: "dd/MM/yyyy  "}}</span>
+        </div>
+        <div flex layout-align="center center" layout-gt-xs="column" layout="row" flex style="width: 100%">
+            <span>Na fila</span>
+            <span flex></span>
+            <md-button class="md-fab md-primary" aria-label="Eat cake" ng-disabled="!data.data.allowed">
+                <md-icon md-svg-src="clock"></md-icon>
+            </md-button>
+            <div flex class="line" hide-xs></div>
+            <div class="lineh" hide-gt-xs></div>
+            <span style="width: 90px; text-align: center">20/10/2015</span>
+        </div>
+        <div flex layout-align="center center" layout-gt-xs="column" layout="row" flex style="width: 100%">
+            <span>Em execução</span>
+            <span flex></span>
+            <md-button class="md-fab md-primary" aria-label="Eat cake">
+                <md-icon md-svg-src="worker"></md-icon>
+            </md-button>
+            <div flex class="line" hide-xs></div>
+            <div class="lineh" hide-gt-xs></div>
+            <span style="width: 90px; text-align: center">20/10/2015</span>
+        </div>
+        <div flex layout-align="center center" layout-gt-xs="column" layout="row" flex style="width: 100%">
+            <span>Concluído</span>
+            <span flex></span>
+            <md-button class="md-fab md-primary" aria-label="Eat cake" ng-disabled="true">
+                <md-icon md-svg-src="check-all"></md-icon>
+            </md-button>
+            <div flex class="line" hide-xs></div>
+            <div class="lineh" hide-gt-xs></div>
+            <span style="width: 90px; text-align: center">20/10/2015</span>
+        </div>
+        <div flex layout-align="center center" layout-gt-xs="column" layout="row" flex style="width: 100%">
+            <span>Entregue</span>
+            <span flex></span>
+            <md-button class="md-fab md-primary" aria-label="Eat cake" ng-disabled="true">
+                <md-icon md-svg-src="truck-delivery"></md-icon>
+            </md-button>
+            <div class="lineh" hide-gt-xs style="opacity: 0;"></div>
+            <span style="width: 90px; text-align: center">Aguardando</span>
+        </div>
+    </div>
+</md-card>

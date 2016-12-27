@@ -1,0 +1,68 @@
+<style type="text/css">
+    .lg {
+        background: url(src/img/login-bg2.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+</style>
+<div class="lg" layout-fill layout="column" layout-align="center center">
+    <img src="src/img/logo_icon/android-icon-72x72.png" hide-xs>
+    <div layout="row" style="width: 100%" layout-align="center">
+    <md-card flex-xs="100" flex-sm="60" flex-md="40" flex-lg="30" flex-xl="20">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <span>Login vPad</span>
+            </div>
+        </md-toolbar>
+        <md-content ng-hide="pload">
+            <md-subheader class="md-no-sticky" hide-xs>Insira seus dados de acesso ao vPad</md-subheader>
+            <form name="loginform" ng-submit="login()">
+                <div layout-padding>
+                    <div>
+                        <md-input-container class="md-block">
+                            <input ng-model="data_login.email" type="email" placeholder="Email" name="email" required id="email">
+                            <div ng-messages="loginform.email.$error">
+                                <div ng-message="required">Informe o seu email.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <input ng-model="data_login.senha" type="password" placeholder="Senha" name="senha" required>
+                            <div ng-messages="loginform.senha.$error">
+                                <div ng-message="required">Informe a sua senha.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </div>
+                <div layout="column" layout-gt-xs="row">
+                    <md-button type="submit" class="md-raised md-primary" ng-disabled="loginform.$invalid || loginform.$submitted">
+                        Entrar
+                    </md-button>
+                    <md-button ng-click="fboauth()" flex ng-hide="pload" type="button" class="md-raised md-primary" style="background-color: #3b5998;">
+                        <md-icon md-svg-icon="facebook-box"></md-icon> Entrar com facebook
+                    </md-button>
+                </div>
+                <div layout="row">
+                    <md-button flex ui-sref="register" class="md-raised md-primary md-block">Criar nova conta</md-button>
+                </div>
+            </form>
+        </md-content>
+        <md-content ng-show="pload">
+            <md-subheader class="md-no-sticky" hide-xs>Selecione uma empresa para se conectar</md-subheader>
+            <md-list>
+                <md-list-item class="md-2-line" ng-repeat="empresas in empresas" ng-click="autorizar(empresas.eid, empresas.empresa, empresas.cidade)">
+                    <md-icon md-svg-icon="city">business</md-icon>
+                    <div class="md-list-item-text" ng-class="{'md-offset': $index == 2 }">
+                        <h3> {{ empresas.empresa }} </h3>
+                        <p> {{ empresas.cidade }} </p>
+                    </div>
+                </md-list-item>
+            </md-list>
+            <div layout="row">
+                <md-button flex ng-show="pload" ng-click="pload = false; loginform.$submitted = false" class="md-raised md-primary">Voltar</md-button>
+            </div>
+                <md-progress-linear md-mode="indeterminate" ng-show="barload"></md-progress-linear>
+        </md-content>
+    </md-card></div>
+</div>

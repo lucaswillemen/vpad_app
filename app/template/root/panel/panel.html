@@ -1,0 +1,59 @@
+<style type="text/css">
+   .perfil_bg{
+   background: url(http://2.bp.blogspot.com/-2RewSLZUzRg/U-9o6SD4M6I/AAAAAAAADIE/voax99AbRx0/s1600/14%2B-%2B1%2B%281%29.jpg);
+   background-size: cover;
+   }
+
+   .bg-primary{
+   background-color: rgb(3,155,229);
+   }
+</style>
+<md-toolbar >
+   <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" aria-label="facebook" href="http://facebook.com/vgsti" target="_blank">
+         <md-icon md-svg-icon="facebook"></md-icon>
+      </md-button>
+      <md-button class="md-icon-button" aria-label="googleplus" href="https://plus.google.com/+VectorgrayBrvpad" target="_blank">
+         <md-icon md-svg-icon="google-plus"></md-icon>
+      </md-button>
+      <md-button class="md-icon-button" aria-label="tiwtter" href="https://twitter.com/vectorgray" target="_blank">
+         <md-icon md-svg-icon="twitter"></md-icon>
+      </md-button>
+      <span flex></span>
+      <md-button class="md-icon-button" aria-label="close" ng-click="buildToggler('panelsite')">
+         <md-icon md-svg-icon="close"></md-icon>
+      </md-button>
+   </div>
+</md-toolbar>
+<div class="md-padding bg-primary" layout="column" flex flex>
+   <div layout="row">
+      <img flex="40" ng-src="src/img/logo.png" class="md-avatar" style="width:100%; height:100%; border-radius:50%" /> 
+      <div layout="column" layout-align="center center" class="md-padding">
+         <span style="color: white; font-weight: 300;" class="md-headline">vPad 4</span>
+      </div>
+   </div>
+</div>
+<md-divider inset></md-divider>
+</div>
+<md-list>
+   <md-list-item ng-click="btnlogin()" >
+      <md-item-content md-ink-ripple layout="row" layout-align="start center">
+         <div class="inset">
+            <md-icon md-svg-icon="account-outline"></md-icon>
+         </div>
+         <div class="inset">Acessar o vPad</div>
+      </md-item-content>
+   </md-list-item>
+   <md-list-item ng-click="btnregistro()" >
+      <md-item-content md-ink-ripple layout="row" layout-align="start center">
+         <div class="inset">
+         <md-icon md-svg-icon="account-box-outline"></md-icon>
+         </div>
+         <div class="inset">Criar uma nova conta</div>
+      </md-item-content>
+      <span flex></span>
+      <span class="sidebar-badge badge-circle md-warm">{{listafeedback_conta.length + listafeedback_pagamento.length + listafeedback_os.length}}</span>
+   </md-list-item>
+</md-list>
+<md-divider inset></md-divider>
+<ng-view ui-view="subpainel" ></ng-view>

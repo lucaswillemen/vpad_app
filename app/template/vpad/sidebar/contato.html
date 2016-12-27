@@ -1,0 +1,47 @@
+
+         <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="contato">
+            <md-toolbar>
+               <div class="md-toolbar-tools">
+                  <md-button class="md-icon-button" aria-label="Settings" ng-click="buildToggler('contato')">
+                <md-icon md-svg-icon="arrow-left">
+                  </md-button>
+                  <h2>
+                     <span>Contatos</span>
+                  </h2>
+               </div>
+            </md-toolbar>
+            <md-content>
+               <md-tabs md-stretch-tabs="always" md-dynamic-height  md-border-bottom>
+                  <md-tab label="Clientes">
+                        <md-list >
+                           <md-list-item ng-repeat="a in lista | orderBy:'nome'" class="md-2-line" href="tel: +55 {{a.dados.celular}}">
+                              <md-icon class="material-icons">smartphone</md-icon>
+                              <div class="md-list-item-text">
+                                 <h3>{{a.dados.nome }}  </h3>
+                                 <p>  {{a.dados.celular}}</p>
+                              </div>
+                           </md-list-item>
+                        </md-list >
+                  </md-tab>
+                  <md-tab label="Empresas">
+
+                     <md-content>
+                        <md-list >
+                           <md-list-item ng-repeat="a in listaf | orderBy:'nomefornecedor'" class="md-3-line">
+                              <md-icon class="material-icons">phone</md-icon>
+                              <div class="md-list-item-text">
+                                 <p>{{a.nome }}</p>
+                                 <a href="tel:+55{{a.celular}}">
+                                    <p>{{a.celular}}</p>
+                                 </a>
+                                 <a href="tel:+55{{a.telefone}}">
+                                    <p>{{a.telefone}}</p>
+                                 </a>
+                              </div>
+                           </md-list-item>
+                        </md-list >
+                     </md-content>
+                  </md-tab>
+               </md-tabs>
+            </md-content>
+         </md-sidenav>

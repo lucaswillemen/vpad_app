@@ -1,0 +1,43 @@
+<div layout="column" flex class='animate-hide'>
+   <md-toolbar class="md-table-toolbar md-default md-tall" >
+      <div class="md-toolbar-tools">
+         <h2 class="md-title">Faturas</h2>
+         <div flex></div>
+         <md-button class="md-raised md-primary" aria-label="Settings" ui-sref="vpad.payment">
+            <md-tooltip md-direction="top">{{i18n.products.add}}</md-tooltip>
+            <md-icon md-svg-icon="plus"></md-icon>
+            <span style="color:white">Gerar fatura</span>
+         </md-button>
+      </div>
+      <div class="md-toolbar-tools ">
+         <md-icon md-svg-icon="account-search" style="fill:#757575"></md-icon>
+         <form flex name="filter.form">
+            <md-input-container md-no-float style="padding-top:25px">
+               <input ng-model="filter.search" class="md-dark" id="sfocus" placeholder="{{i18n.basic.search}}" flex md-autofocus>
+            </md-input-container>
+         </form>
+         <span flex></span>
+         <span ng-show="options.rowSelection && selected.length">{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selecionados</span>
+      </div>
+   </md-toolbar>
+   <table md-table md-progress="promise_table" flex>
+      <thead fix-head md-head md-order="query.order" md-on-reorder="logOrder">
+         <tr md-row>
+            <th md-column md-order-by="dados.datapagamento"><span>Data de pagamento</span></th>
+            <th hide-xs  hide-sm md-column md-column md-order-by="dados.vencimento"><span>Data de vencimento</span></th>
+            <th hide-xs  hide-sm md-column md-order-by="dados.desc"><span>Descrição</span></th>
+            <th md-column md-order-by="dados.valor"><span>Valor</span></th>
+         </tr>
+      </thead>
+      <tbody md-body>
+         <tr md-row md-select="dessert" ng-repeat="dessert in desserts | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+            <td md-cell>{{dessert.datapagamento | date: "dd/MM/yyyy"}}</td>
+            <td md-cell>{{dessert.vencimento | date: "dd/MM/yyyy"}}</td>
+            <td md-cell>{{dessert.desc}}</td>
+            <td md-cell>{{dessert.valor | currency: "R$ "}}</td>            
+         </tr>
+      </tbody>
+   </table>
+   <span flex></span>
+   <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{desserts.length}}" md-limit-options="[5, 10, 15, 30, 100]" ></md-table-pagination>
+</div>

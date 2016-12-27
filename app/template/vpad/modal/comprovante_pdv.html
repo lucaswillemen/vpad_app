@@ -1,0 +1,36 @@
+
+<md-dialog flex-xs="95" flex-sm="80" flex-md="60" flex-lg="60" layout="column" style="z-index: 99999">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Comprovante da venda</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-icon="close">
+            </md-button>
+        </div>
+    </md-toolbar>
+    <div layout-padding>
+ <fieldset flex>
+        <legend>Comprovante</legend>
+        <div>
+            <h3>Total: {{data.total | currency: ' R$ '}} </h3>
+            <div ng-repeat="prod in data.produtos" layout="column">
+                <span>{{prod.nome}}</span>
+                <div layout="row" layout-align="center center">
+                    <span>{{prod.qntd}} x </span> <span>{{prod.price | currency: ' R$ '}}</span><span flex></span>
+                    <span>{{prod.price*prod.qntd | currency: 'R$ '}}</span>
+
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    </div>
+
+    <md-dialog-actions>
+        <span flex></span>
+        <md-progress-circular md-mode="indeterminate" ng-show="formPop2.$submitted" md-diameter="20"></md-progress-circular>
+        <md-button class="md-primary md-raised" type="submit" ng-disabled="formPop2.$invalid || formPop2.$submitted">
+            <span ng-hide="formPop3.$submitted">  Impprimir </span>
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

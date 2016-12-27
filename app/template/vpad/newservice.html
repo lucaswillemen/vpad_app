@@ -1,0 +1,348 @@
+
+<div layout="column" flex>
+   <md-toolbar class="md-table-toolbar md-primary" >
+      <div class="md-toolbar-tools">
+         <h2 class="md-title">{{text.newservices.title}} </h2>
+         <div flex></div>
+      </div>
+      <span flex></span>
+</div>
+</md-toolbar>
+<md-content layout-padding>
+   <div ng-show="screen=='first'" ng-init="screen='first'">
+      <div layout="row" layout-xs="column" >
+         <fieldset class="standard" flex>
+            <legend>Dados do serviço</legend>
+            <p>Tipo do serviço: </p>
+            <md-radio-group ng-model="data_service.type" ng-init="data_service.type='maintenance'">
+               <md-radio-button value="maintenance">Reparo ou manutenção</md-radio-button>
+               <md-radio-button value="create">Criação ou instalação</md-radio-button>
+               <md-radio-button value="fixe">Contrato ou fixo</md-radio-button>
+            </md-radio-group>
+            <p>Opções</p>
+               <md-checkbox ng-model="data_service.cb_produtos" ng-init="data_service.cb_produtos=true">Produtos</md-checkbox>
+               <md-checkbox ng-model="data_service.cb_services" >Serviços</md-checkbox>
+            <p>Data de registro</p>
+            <md-datepicker ng-model="data_service.dataregistro" md-placeholder="Informe a data"></md-datepicker>
+         </fieldset>
+         <fieldset class="standard" flex layout="column">
+            <legend>Dados do cliente</legend>
+            <p>Cliente</p>
+               <p>Escolha um dos clientes da sua lista.</p>
+               <md-autocomplete required name="cliente" autofocus
+               ng-model="dddsdasd"
+               id="Auto"
+                  md-selected-item="item" 
+                  md-selected-item-change="send_item(item)" 
+                  md-search-text="filter" 
+                  md-items="item in clientes | filter: filter" 
+                  md-item-text="item.dados.nome" 
+                  md-min-length="3" 
+                  placeholder="Informe as 3 primeiras letras do nome">
+                  <md-item-template>
+                     <span class="item-title">
+                        <md-icon md-svg-icon="account-multiple-outline"></md-icon>
+                        <span> {{item.dados.nome}} </span>
+                     </span>
+                        <span class="item-metadata">
+                        <span class="item-metastat">
+                           <strong>{{item.dados.email}}</strong>
+                        </span>
+                     </span>
+                  </md-item-template>
+                  <md-not-found flex >
+                     <div ng-click="popupaddNovo(); hidecoments()">Adcionar novo cliente</div>
+                  </md-not-found>
+                  <div ng-messages="os.cliente.$error">
+                    <div ng-message="required">Informe o nome do cliente</div>
+                  </div>
+               </md-autocomplete>
+               <br>
+               <md-checkbox ng-model="data_service.follow" ng-init="data_service.follow=true">Permitir acompanhamento?</md-checkbox>
+               <md-checkbox ng-model="data_service.diagnostic" ng-show="data_service.budget">Análise e diagnóstico?</md-checkbox>
+               <md-checkbox ng-model="data_service.allowed" ng-hide="data_service.budget">Serviço já autorizado?</md-checkbox>
+               <md-checkbox ng-model="data_service.docked" ng-show="data_service.type=='fixe'">Associar contrato?</md-checkbox>
+               <md-input-container flex ng-show="data_service.docked && data_service.type=='fixe'">
+               <label>Modelo de contrato</label>
+                <md-select ng-model="data_service.doc" flex>
+                  <md-option value="default">
+                    Modelo padrão
+                  </md-option>
+                </md-select>
+                </md-input-container>
+                <div ng-show="data_service.type=='ticket'">
+                <p>Validade / Término</p>
+            <md-datepicker ng-model="data_service.validate" md-placeholder="Informe a data"></md-datepicker>
+            </div>
+         </fieldset>
+      </div>
+      <div layout="row" flex layout-align="center center">
+         <md-button class="md-raised md-primary" ng-click="!data_service.diagnostic?screen='sec':screen='terc'" ng-disabled="!data_service.cliente">Próximo passo</md-button>
+      </div>
+   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   <style type="text/css">
+      .md-autocomplete-suggestions  li {
+      border-bottom: 1px solid #ccc;
+      height: auto;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      white-space: normal; }
+      .md-autocomplete-suggestions  li:last-child {
+      border-bottom-width: 0; }
+      .item-title,
+      .item-metadata {
+      display: block;
+      line-height: 2; }
+      .item-title md-icon {
+      height: 18px;
+      width: 18px; }
+   </style>
+   <div ng-show="screen=='sec'">
+      <div layout="row" layout-xs="column" >
+         <fieldset class="standard" flex  ng-show="data_service.cb_produtos">
+            <legend>Produtos</legend>
+            <p>Escolha um dos produto da sua lista.</p>
+               <md-autocomplete required name="produto" 
+                  md-selected-item="item_prod" 
+                  md-selected-item-change="select_prod(item)" 
+                  md-search-text="filter_prod" 
+                  md-items="item in produtos | filter: filter_prod" 
+                  md-item-text="item.dados.nome" 
+                  md-min-length="3" 
+                  placeholder="Informe as 3 primeiras letras do nome">
+                  <md-item-template>
+                     <span class="item-title">
+                        <md-icon md-svg-icon="account-multiple-outline"></md-icon>
+                        <span> {{item.dados.nome}} </span>
+                     </span>
+                        <span class="item-metadata">
+                        <span class="item-metastat">
+                           <strong>{{item.dados.pricesell | currency: 'R$ '}}</strong>
+                        </span>
+                     </span>
+                  </md-item-template>
+                  <md-not-found flex >
+                     <div >Nenhum produto encontrado</div>
+                  </md-not-found>
+                  <div ng-messages="os.produto.$error">
+                    <div ng-message="required">Informe o nome do produto</div>
+                  </div>
+               </md-autocomplete>
+               <div layout-gt-sm="row">
+                <md-input-container class="md-block">
+                     <label>Quantidade</label>
+                     <input ng-model="selected_prod.qntd" name="name" required type="number">
+                     <div ng-messages="vendorForm.name.$error">
+                        <div ng-message="required">Informe a quantidade do produto.</div>
+                     </div>
+                  </md-input-container>
+                <md-input-container class="md-block">
+                     <label>Valor</label>
+                     <input ng-model="selected_prod.dados.pricesell" name="name" readonly="" ui-money-mask="2">
+                     
+                  </md-input-container>
+                  <md-button ng-click="add_prod()" class="md-raised md-primary">Adicionar</md-button>
+                  </div>
+                  <div ng-show="subtotal_prod">
+                     <p>Subtotal: {{subtotal_prod  | currency: 'R$ '}} </p>
+                     <div ng-repeat="prod in data_service.produtos" layout="column" >
+                        <span>{{prod.nome}}</span>
+                        <div layout="row" layout-align="center center">
+                        <span>{{prod.qntd}}x </span> <span>{{prod.price | currency: ' R$ '}}</span><span flex></span>
+                        <span>{{prod.price*prod.qntd | currency: 'R$ '}}</span>
+
+                        <md-button class="md-icon-button">
+                            <md-icon md-svg-icon="close" ng-click='remove_prod($index)'></md-icon>
+                        </md-button>
+                        </div>
+                        <md-divider></md-divider>
+                     </div>
+                  </div>
+                  
+            
+         </fieldset>
+         <fieldset class="standard" flex ng-show="data_service.cb_services">
+            <legend>Serviços</legend>
+            <p>Escolha um dos serviço da sua lista.</p>
+               <md-autocomplete required name="produto" 
+                  md-selected-item="item_serv" 
+                  md-selected-item-change="select_serv(item)" 
+                  md-search-text="filter_serv" 
+                  md-items="item in services | filter: filter_serv" 
+                  md-item-text="item.dados.nome" 
+                  md-min-length="3" 
+                  placeholder="Informe as 3 primeiras letras do nome">
+                  <md-item-template>
+                     <span class="item-title">
+                        <md-icon md-svg-icon="account-multiple-outline"></md-icon>
+                        <span> {{item.dados.nome}} </span>
+                     </span>
+                        <span class="item-metadata">
+                        <span class="item-metastat">
+                           <strong>{{item.dados.price | currency: 'R$ '}}</strong>
+                        </span>
+                     </span>
+                  </md-item-template>
+                  <md-not-found flex >
+                     <div >Nenhum produto encontrado</div>
+                  </md-not-found>
+                  <div ng-messages="os.produto.$error">
+                    <div ng-message="required">Informe o nome do produto</div>
+                  </div>
+               </md-autocomplete>
+               <div layout-gt-sm="row">
+                <md-input-container class="md-block">
+                     <label>Quantidade</label>
+                     <input ng-model="selected_serv.qntd" name="name" required type="number">
+                     <div ng-messages="vendorForm.name.$error">
+                        <div ng-message="required">Informe a quantidade do produto.</div>
+                     </div>
+                  </md-input-container>
+                <md-input-container class="md-block">
+                     <label>Valor</label>
+                     <input ng-model="selected_serv.dados.price" name="name" readonly="" ui-money-mask="2">
+                     
+                  </md-input-container>
+                  <md-button ng-click="add_serv()" class="md-raised md-primary">Adicionar</md-button>
+                  </div>
+                  <div ng-show="subtotal_serv">
+                     <p>Subtotal: {{subtotal_serv  | currency: 'R$ '}} </p>
+                     <div ng-repeat="serv in data_service.services" layout="column" >
+                        <span>{{serv.nome}}</span>
+                        <div layout="row"  layout-align="center center">
+                        <span>{{serv.qntd}}x </span> <span>{{serv.price | currency: ' R$ '}}</span><span flex></span>
+                        <span>{{serv.price*serv.qntd | currency: 'R$ '}}</span>
+
+                        <md-button class="md-icon-button">
+                            <md-icon md-svg-icon="close" ng-click='remove_serv($index)'></md-icon>
+                        </md-button>
+                        </div>
+                        <md-divider></md-divider>
+                     </div>
+                  </div>
+            
+         </fieldset>
+      </div>
+      <div layout="row" flex layout-align="center center">
+         <md-button class="md-raised md-default" ng-click="screen='first'">Voltar</md-button>
+         <md-button class="md-raised md-primary" ng-click="screen='terc'" >Próximo passo</md-button>
+      </div>
+   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   <div ng-show="screen=='terc'">
+      <div layout="row" layout-xs="column" >
+         
+         <fieldset flex>
+            <legend>Dados de cobrança</legend>
+            <p ng-show="data_service.type!='maintenance'" >Tipo de faturamento: <span class="radioValue"></span> </p>
+            <md-radio-group ng-model="data_service.payment" ng-show="data_service.type=='fixe'" ng-init="data_service.payment='fixe'">
+               <md-radio-button value="fixe">Pagamento único</md-radio-button>
+               <md-radio-button value="month">Assinatura mensal</md-radio-button>
+               <md-radio-button value="year">Assinatura anual</md-radio-button>
+            </md-radio-group>
+            <div ng-show="data_service.payment!='fixe'">
+               <p>Término da assinatura:</p>
+               <md-checkbox ng-model="data_service.end" aria-label="Checkbox 1">
+                  Programar uma data final?
+               </md-checkbox>
+               <md-datepicker ng-show="data_service.end" ng-model="data_service.termino" md-placeholder="Informe a data"></md-datepicker>
+            </div>
+            <div layout="column">
+               <p ng-hide="data_service.diagnostic">Valor da OS: {{subtotal_serv+subtotal_prod| currency: 'R$ '}} </p>
+               <p>Custos extras </p>
+               <md-checkbox ng-model="data_service.varfr" aria-label="Checkbox 1">
+                  Possui frete?
+               </md-checkbox>
+               <md-input-container class="md-block" ng-show="data_service.varfr">
+                  <label>Valor do frete</label>
+                  <input ng-model="data_service.coust.fr"  ui-money-mask="2">
+               </md-input-container>
+               <md-checkbox ng-model="data_service.vargo" aria-label="Checkbox 1">
+                  Gasto operacional
+               </md-checkbox>
+               <md-input-container class="md-block" ng-show="data_service.vargo">
+                  <label>Custo operacional</label>
+                  <input ng-model="data_service.coust.op"  ui-money-mask="2">
+               </md-input-container>
+               <md-checkbox ng-model="data_service.vards" aria-label="Checkbox 1">
+                  Custo de deslocamento
+               </md-checkbox>
+               <md-input-container class="md-block" ng-show="data_service.vards">
+                  <label>Valor do deslocamento</label>
+                  <input ng-model="data_service.coust.ds"  ui-money-mask="2">
+               </md-input-container>
+            </div>
+         </fieldset>
+         <fieldset flex>
+            <legend>Prazos</legend>
+            <p>Previsão de entrega</p>
+            <md-datepicker ng-model="data_service.entrega" md-placeholder="Informe a data"></md-datepicker>
+            <p>Prazo máximo</p>
+            <md-datepicker ng-model="data_service.prazo" md-placeholder="Informe a data"></md-datepicker>
+         </fieldset>
+      </div>
+      <div layout="row" flex layout-align="center center">
+         <md-button class="md-raised md-default" ng-click="!data_service.diagnostic?screen='sec':screen='first'">Voltar</md-button>
+         <md-button class="md-raised md-primary" ng-click="save()" ng-disabled="!data_service.cliente">{{text.basic.save}}</md-button>
+      </div>
+   </div>
+</md-content>

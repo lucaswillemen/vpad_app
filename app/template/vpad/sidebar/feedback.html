@@ -1,0 +1,34 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="feedback" layout="column" flex>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="Settings" ng-click="buildToggler('feedback')">
+                <md-icon md-svg-icon="arrow-left"></md-icon>
+            </md-button>
+            <h2>
+                <span>Feedback</span>
+            </h2>
+        </div>
+    </md-toolbar>
+    <md-tabs md-stretch-tabs="always" md-border-bottom flex>
+        <md-tab label="Atividades" ng-click="leratividade()">
+            <md-tab-label>Atividades
+                <md-badge ng-if="atividade.count>0">{{atividade.count}} </md-badge>
+            </md-tab-label>
+            <md-tab-body>
+                <md-list>
+                    <md-list-item ng-repeat="(k, b) in atividade | orderBy:'-dataregistro'" class="md-2-line" ng-class="k >= getlasthighlighatividade ? '':'highlight'" layout="row" ng-click="fu()">
+                        <md-icon md-svg-icon="email-outline"></md-icon>
+                        <div class="md-list-item-text" flex style="    width: 100%;">
+                            <h3>{{b.nome }}</h3>
+                            <p>{{b.txt }} </p>
+                            <p flex layout-align="end none" layout="row"><span class="md-caption">{{b.dataregistro  | date:'HH:mm - dd/MM'}}</span></p>
+
+                        </div>
+
+                        <md-divider inset></md-divider>
+                    </md-list-item>
+                </md-list>
+            </md-tab-body>
+        </md-tab>
+    </md-tabs>
+</md-sidenav>

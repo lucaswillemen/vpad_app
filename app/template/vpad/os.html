@@ -1,0 +1,34 @@
+<div layout="column" flex class="notprintt">
+    <md-toolbar class="md-table-toolbar md-default">
+        <div class="md-toolbar-tools">
+            <h2 class="md-title">Ordens de serviço </h2>
+            <div flex></div>
+            <md-button class="md-raised md-primary" aria-label="Settings" ui-sref="vpad.newservice" ng-click="popupaddNovo($event)">
+                <md-icon md-svg-icon="plus"></md-icon> Abrir nova OS
+            </md-button>
+        </div>
+        <span flex></span>
+    </md-toolbar>
+</div>
+<div layout="column" layout-gt-xs="row" layout-wrap>
+    <div flex-gt-xs='33' ng-repeat="data in data">
+        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">{{data.data.cliente.dados.nome}}</span>
+                    <span class="md-subhead">Valor da OS: {{calculate(data.data.produtos, data.data.services, data.data.coust) | currency: " R$ "}}</span>
+                </md-card-title-text>
+                <md-card-title-media>
+                    <md-button class="md-fab md-primary">
+                        <md-icon ng-if="!data.data.allowed" md-svg-src="calculator"></md-icon>
+                        <md-icon ng-if="data.data.allowed" md-svg-src="clock"></md-icon>
+                    </md-button>
+                </md-card-title-media>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="end center">
+                <span flex>Prazo: {{data.data.entrega | date: "dd/MM/yyyy"}} </span>
+                <md-button class="md-raised md-primary md-block" ui-sref="vpad.monitoring({id: data._id})">Abrir</md-button>
+            </md-card-actions>
+        </md-card>
+    </div>
+</div>

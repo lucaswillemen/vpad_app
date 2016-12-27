@@ -1,0 +1,147 @@
+<style type="text/css">
+    .lg {
+        background: url(src/img/register.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    .md-headline{
+        font-weight: 300; width:80%; text-align:center
+    }
+</style>
+<div class="lg" layout-fill layout="column" layout-align="center center">
+    <div layout="row" style="width: 100%" layout-align="center">
+    <md-card class="cont"  flex-xs="100" flex-sm="60" flex-md="40" flex-lg="30" flex-xl="20" layout="row" layout-align="center">
+        <md-content ng-show="src=='start'" layout="column" layout-align="center center" layout-padding>
+            <span style="font-weight: 300; color: #757575;" class="md-display-1">Olá, seja bem vindo!</span>            
+            <span class="md-headline">Aqui vamos realizar o seu cadastro e irei te explicar tudo sobre o sistema nesse seu primeiro acesso.</span>
+            <div layout="row" style="width: 100%">
+                <md-button flex class="md-raised md-primary md-block" ng-click="step('register')">Vamos começar!</md-button>
+            </div>
+        </md-content>
+        <md-content ng-show="src=='register'" layout-padding>
+            <span class="md-headline">Informe os primeiros detalhes sobre a sua empresa e você.</span>
+            <form name="form1" ng-submit="step('empresa')">
+                <md-input-container class="md-block" flex>
+                    <label>Seu nome completo</label>
+                    <input ng-model="user.nome" name="name" required>
+                    <div ng-messages="form1.name.$error">
+                        <div ng-message="required">Informe o seu nome.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block" flex>
+                    <label>Nome da sua empresa</label>
+                    <input ng-model="empresa.nome" name="empresa" required>
+                    <div ng-messages="form1.empresa.$error">
+                        <div ng-message="required">Informe o seu nome.</div>
+                    </div>
+                </md-input-container>
+                <div layout="row">
+                    <md-button flex class="md-raised md-primary" type="submit" ng-disabled="form1.$invalid || form1.$submitted">{{form1.$invalid ? 'Complete os campos':'Próximo passo'}}</md-button>
+                </div>
+            </form>
+        </md-content>   
+        <md-content ng-show="src=='empresa'" layout-padding>
+            <span class="md-headline">Vamos identificar a sua necessidade de uso do vPad.</span>
+            <form name="form4" layout="column" ng-submit="step('local')">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Quantas pessoas tem seu time?</label>
+                    <input ng-model="empresa.equipe" name="name" required type="numeric">
+                    <div ng-messages="form4.name.$error">
+                        <div ng-message="required">Informe o seu nome.</div>
+                    </div>
+                </md-input-container>
+
+                <md-checkbox ng-model="empresa.opt.product" class="md-primary" ng-init="empresa.opt.product=true">
+                    Minha empresa vende produtos
+                </md-checkbox>
+                <md-checkbox ng-model="empresa.opt.service" class="md-primary">
+                    Minha empresa realiza serviços
+                </md-checkbox>
+                <md-checkbox ng-model="empresa.opt.website" class="md-primary">
+                    Temos site e email corporativo
+                </md-checkbox>
+                <md-checkbox ng-model="empresa.opt.ecommerce" class="md-primary" ng-if="empresa.opt.website">
+                    O site é uma loja ou e-commerce
+                </md-checkbox>
+                <md-checkbox ng-model="empresa.opt.dev" class="md-primary" ng-if="empresa.opt.website">
+                    Temos desenvolvedor de sistemas
+                </md-checkbox>
+                <md-input-container class="md-block" flex-gt-sm ng-if="empresa.opt.website">
+                    <label>Informe o domínio do site</label>
+                    <input ng-model="empresa.domain" name="empresa" required type="url">
+                    <div ng-messages="form4.empresa.$error">
+                        <div ng-message="required">Informe o seu site.</div>
+                    </div>
+                </md-input-container>
+                <md-checkbox ng-model="empresa.opt.nf" class="md-primary">
+                    Minha empresa emite nota fiscal
+                </md-checkbox>
+                <div layout="row">
+                    <md-button flex class="md-raised md-primary" type="submit" ng-disabled="form4.$invalid || form4.$submitted">{{form4.$invalid ? 'Complete os campos':'Próximo passo'}}</md-button>
+                </div>
+            </form>
+        </md-content>
+        <md-content ng-show="src=='local'" layout-padding>
+            <span class="md-headline">Informe o seu CEP e confirme a sua localização.</span>
+            <form name="form2" ng-submit="cep()">
+                <md-input-container class="md-block" flex-gt-sm ng-show="!empresa.localidade">
+                    <label>CEP</label>
+                    <input ng-model="empresa.cep" name="cep" required ui-br-cep-mask>
+                    <div ng-messages="form2.cep.$error">
+                        <div ng-message="required">Informe o seu cep.</div>
+                    </div>
+                </md-input-container>
+                <div ng-if="!empresa.localidade" layout="row">
+                    <md-button flex type="submit" class="md-raised md-primary" ng-disabled="form2.$invalid ">{{form2.$invalid ? 'Informe o CEP':'Verificar'}}</md-button>
+                </div>
+            </form>
+            <md-list ng-if="empresa.localidade">
+                <md-list-item>
+                    <md-icon md-svg-icon="city"></md-icon>
+                    {{empresa.localidade}}
+                </md-list-item>
+                <md-list-item>
+                    <md-icon md-svg-icon="earth"></md-icon>
+                    {{empresa.uf}}
+                </md-list-item>
+            </md-list>
+            <div ng-if="empresa.localidade" layout="row">
+                <md-button flex class="md-raised md-primary" ng-click="step('adm')" ng-disabled="form2.$invalid ">Confirmar</md-button>
+            </div>
+        </md-content>
+        <md-content ng-show="src=='adm'" layout-padding>
+            <span class="md-headline">Informe um email e senha para criar a conta do administrador.</span>
+            <form name="form3">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Seu email</label>
+                    <input ng-model="user.email" name="email" required type="email">
+                    <div ng-messages="form3.email.$error">
+                        <div ng-message="required">Informe o seu email.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Sua senha</label>
+                    <input ng-model="user.senha" name="senha" required type="password">
+                    <div ng-messages="form3.senha.$error">
+                        <div ng-message="required">Informe o sua senha.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Confirme sua senha</label>
+                    <input ng-model="data.dados.csenha" name="csenha" required type="password">
+                    <div ng-messages="form3.csenha.$error">
+                        <div ng-message="required">Confirme sua senha.</div>
+                    </div>
+                    <span style="color:red" ng-show="user.senha!=data.dados.csenha">As senhas não são iguais</span>
+                </md-input-container>
+            </form>
+            <div layout="row">
+                <md-button flex class="md-raised md-primary" ng-click="cadastrar()" ng-disabled="form3.$invalid || user.senha!=data.dados.csenha">
+                    {{form3.$invalid || data.dados.senha!=data.dados.csenha ? 'Innforme seus dados':'Continuar'}}</md-button>
+            </div>
+        </md-content>
+    </md-card>
+</div>
+

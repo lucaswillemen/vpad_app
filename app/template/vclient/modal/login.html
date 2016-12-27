@@ -1,0 +1,77 @@
+<md-dialog  flex-xs="90" flex-sm="55" flex-md="40" flex-lg="30">
+   <md-toolbar >
+      <div class="md-toolbar-tools">
+         <h2>
+            <span>Acessar vClient</span>
+         </h2>
+         <span flex></span>
+         <md-button class="md-icon-button" aria-label="More">
+            <i class="material-icons md-dark">account_box</i>
+         </md-button>
+      </div>
+   </md-toolbar>
+   <div ng-hide="step2 || step3" class="md-padding">
+      <form name="form" ng-submit="vclient_search()">
+         <p>Informe os seus dados</p>
+         <md-input-container class="md-block" layout-align="center end">
+            <input ng-model="data.dados.email" type="email" placeholder="Email" autofocus name="email" required>
+            <div ng-messages="form.email.$error">
+               <div ng-message="required">Informe o seu email de acesso.</div>
+            </div>
+         </md-input-container>
+         <div layout="row" layout-align="end center">
+            <md-progress-circular md-mode="indeterminate" ng-show="form.$submitted" md-diameter="40"></md-progress-circular>
+            <md-button type="submit" class="md-raised md-primary" ng-disabled="form.$invalid || form.$submitted"> 
+               Entrar
+            </md-button>
+         </div>
+      </form>
+   </div>
+   <div ng-show="step2" class="md-padding">
+      <form name="form2" ng-submit="vclient_create()" autocomplete="off">
+         <p>Vamos fazer um rápido cadastro.<br>Informe seu nome e uma senha.</p>
+         <md-input-container class="md-block">
+            <input ng-model="data.dados.email" type="email" placeholder="Email" name="email" required>
+            <div ng-messages="form2.email.$error">
+               <div ng-message="required">Informe o seu email de acesso.</div>
+            </div>
+         </md-input-container>
+         <md-input-container class="md-block" layout-align="center end">
+            <input ng-model="data.dados.senha" type="password" placeholder="Senha" name="senha" required>
+            <div ng-messages="form2.senha.$error">
+               <div ng-message="required">Informe uma senha para sua conta.</div>
+            </div>
+         </md-input-container>
+         <md-input-container class="md-block">
+            <input ng-model="data.dados.nome" type="text" value="" placeholder="Nome" name="nome" required >
+            <div ng-messages="form2.nome.$error">
+               <div ng-message="required">Informe o seu nome.</div>
+            </div>
+         </md-input-container>
+         <div layout="row" layout-align="end center">
+            <md-progress-circular md-mode="indeterminate" ng-show="form2.$submitted" md-diameter="40"></md-progress-circular>
+            <md-button type="submit" class="md-raised md-primary" ng-disabled="form2.$invalid || form2.$submitted"> 
+               Entrar
+            </md-button>
+         </div>
+      </form>
+   </div>
+   <div ng-show="step3" class="md-padding">
+      <form name="form3" ng-submit="vclient_first()" autocomplete="off">
+      <h4>Seja bem vindo {{nome_first}}</h4>
+         <p>Informe a senha para o primeiro acesso.</p>
+         <md-input-container class="md-block" layout-align="center end">
+            <input ng-model="data.dados.senha" type="password" placeholder="Senha" name="senha" required>
+            <div ng-messages="form3.senha.$error">
+               <div ng-message="required">Informe uma senha para sua conta.</div>
+            </div>
+         </md-input-container>
+         <div layout="row" layout-align="end center">
+            <md-progress-circular md-mode="indeterminate" ng-show="form3.$submitted" md-diameter="40"></md-progress-circular>
+            <md-button type="submit" class="md-raised md-primary" ng-disabled="form3.$invalid "> 
+               Entrar
+            </md-button>
+         </div>
+      </form>
+   </div>
+</md-dialog>

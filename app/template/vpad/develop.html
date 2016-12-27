@@ -1,0 +1,19 @@
+ 
+ <md-tabs md-dynamic-height md-border-bottom>
+ <md-tab label="Chat">
+ <md-content layout-padding>
+ <fieldset class="standard">
+      <legend>Instalação da API do chat</legend>
+      <h4>Instalação:</h4>
+      <span>Insira a script abaixo no final da sua página depois das dependências.<br>Atualmente a API utiliza somente o JQuery apenas para fazer ajustes DOM<br>Caso tenha algum problema, entre em contato conosco.</span>
+      <h4>Dependências:</h4>
+      <md-checkbox ng-disabled="true" aria-label="Disabled checked checkbox" ng-model="data.cb4" ng-init="data.cb4=true">
+           JQuery
+          </md-checkbox>
+      <h4>Código:</h4>
+      <xmp> <script src="https://vpad.com.br/api/chat.html#{{code.eid}}" id="vSyncScript"></script>
+      </xmp>
+    </fieldset>
+    </md-content>
+    </md-tab>
+    </md-tabs>

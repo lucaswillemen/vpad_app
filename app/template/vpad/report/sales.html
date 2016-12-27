@@ -1,0 +1,106 @@
+<style type="text/css">
+    .md-datepicker-calendar-icon {
+        fill: rgb(3, 155, 229) !important;
+    }
+    
+    .text-black {
+        color: black!important;
+    }
+</style>
+<div layout="column" flex>
+    <md-toolbar class="md-table-toolbar md-default">
+        <div class="md-toolbar-tools">
+            <h2 class="md-title">{{text.report.sales.title}} </h2>
+        </div>
+    </md-toolbar>
+    <div layout="column" layout-gt-sm="row">
+        <md-card flex>
+            <md-list>
+                <md-subheader class="md-title md-no-sticky">Detalhes</md-subheader>
+                <md-divider></md-divider>
+                <md-list-item>
+                    <p> Total de vendas: </p>
+                    {{total | currency: "R$ "}}
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item>
+                    <p> Quantidade de vendas: </p>
+                    {{pdv.length}}
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item>
+                    <p> Quantidade de produtos: </p>
+                    {{produtos}}
+                </md-list-item>
+                <md-divider></md-divider>
+            </md-list>
+            <canvas flex id="myChart" height="auto"></canvas>
+        </md-card>
+        <md-card flex>
+            <md-subheader class="md-title md-no-sticky">Opções</md-subheader>
+            <div layout-padding layout="column">
+                <md-input-container>
+                    <label>Período</label>
+                    <md-select ng-model="pre_date_select" placeholder="Filtro" ng-change="pre_date()" style="margin:0px" hide-print>
+                        <md-option value="hoje">Hoje</md-option>
+                        <md-option value="semana">Semana atual</md-option>
+                        <md-option value="mes">Mês atual</md-option>
+                    </md-select>
+                </md-input-container>
+                <div layout="column" layout-gt-sm="row" flex>
+                    <div layout="column" flex>
+                        <label>A partir da data: </label>
+                        <md-datepicker ng-model="data_filter.start" md-placeholder="{{text.products.fields.validate}}" ng-change="recharge()">{{text.products.fields.validate}}</md-datepicker>
+                    </div>
+                    <div layout="column" flex>
+                        <label>Até a data:</label>
+                        <md-datepicker ng-model="data_filter.end" md-placeholder="{{text.products.fields.validate}}" ng-change="recharge()">{{text.products.fields.validate}}</md-datepicker>
+                    </div>
+                </div>
+            </div>
+            <div layout="column" layout-gt-sm="row">
+                <div layout-align="center center" layout="row" flex>
+                    <md-button class="md-raised md-primary" ng-click="print();" hide-print hide-xs flex>
+                        <md-icon md-svg-icon="printer"></md-icon> Imprimir</md-button>
+                </div>
+                <md-input-container md-no-float hide-print style="margin-top: 36px;" flex>
+                    <md-icon md-svg-icon="account-search" style="fill:#757575"></md-icon>
+                    <input ng-model="filter.search" class="md-dark" id="sfocus" placeholder="{{text.basic.search}}" flex md-autofocus>
+                </md-input-container>
+            </div>
+        </md-card>
+    </div>
+    <md-card>
+        <table md-table md-row-select="options.rowSelection" ng-model="selected" md-progress="promise_table" flex>
+            <thead fix-head md-head md-order="query.order" md-on-reorder="logOrder">
+                <tr md-row>
+                    <th md-column md-order-by="registro"><span>{{text.report.sales.fields.dataregistro}}</span></th>
+                    <th md-column md-order-by="data.total"><span>{{text.report.sales.fields.valor}}</span></th>
+                    <th md-column md-numeric><span>{{text.basic.options}}</span></th>
+                </tr>
+            </thead>
+            <tbody md-body>
+                <tr md-row md-select="pdv" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="pdv in pdv | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit">
+                    <td md-cell>{{pdv.registro | date: "dd/MM/yyyy - HH:mm"}}</td>
+                    <td md-cell>{{pdv.data.total | currency: "R$ "}}</td>
+                    <td md-cell md-numeric class="md-table-td-more">
+                        <md-menu md-position-mode="target-right target">
+                            <md-button aria-label="a" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
+                                <md-icon md-svg-icon="more" style="fill:rgb(3,155,229)"></md-icon>
+                            </md-button>
+                            <md-menu-content width="4">
+                                <md-menu-item>
+                                    <md-button ng-click="popupExcluir($event, pdv._id)">
+                                        <md-icon md-svg-icon="delete" style="fill:rgb(3,155,229)"></md-icon>
+                                        {{text.basic.storn}}
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{pdv.length}}" md-limit-options="[5, 10, 15, 30, 100]" hide-print></md-table-pagination>
+    </md-card>
+</div>

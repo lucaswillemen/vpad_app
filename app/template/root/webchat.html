@@ -1,0 +1,101 @@
+<style type="text/css">
+   .introdiv{
+   background-image: url('src/img/bg-2.jpg?1');
+   background-size: cover;
+   height: 100%;
+   background-attachment: fixed;
+   color: #757575;
+   }
+   @media screen and (max-width: 900px) {
+   .introdiv{
+   background-attachment: inherit;
+   }
+   }
+   .big-padding{
+   padding: 30px;
+   }
+   p{
+   color: #757575;
+   }
+</style>
+<div layout="row" flex style="height: 100%;">
+   <md-sidenav class="md-whiteframe-z2" md-component-id="panelsite" md-is-locked-open="$mdMedia('gt-lg')">
+      <div ng-include="'template/root/panel/panel.html'"></div>
+   </md-sidenav>
+   <md-button class="md-fab md-primary" ng-click="buildToggler('panelsite')"  style="position: fixed;">
+      <md-icon md-svg-icon="menu"></md-icon>
+   </md-button>
+   <md-button class="md-fab md-primary" ui-sref="home" style="position: fixed; left:64px">
+      <md-icon md-svg-icon="keyboard-backspace"></md-icon>
+   </md-button>
+   <div layout="column" flex>
+      <md-content>
+         <div class="md-whiteframe-6dp">
+            <div class="introdiv md-whiteframe-6dp" flex layout="row" layout-sm="column" layout-xs="column">
+               <div flex  style="height: 80px;"></div>
+               <div layout="column" layout-align="center center" flex class="md-padding">
+                  <div flex style="height: 80px;"></div>
+                  <img  ng-src="src/img/logo.png" style="width: 40%;" />
+                  <div flex style="height: 120px;"></div>
+                  <span style="color: white; font-weight: 100;" class="md-display-1">Por que usar um</span>
+                  <span style="color: white; font-weight: 100;" class="md-display-1">chat em seu site?</span>
+                  <span style="color: white; font-weight: 300;" class="md-subhead">Veja abaixo alguns motivos</span>
+                  <span style="color: white; font-weight: 300;" class="md-subhead"> visto por outros aspectos</span>
+                  <span hide-xs style="height: 50px;"></span>
+                  <div flex style="height: 60px;"></div>
+               </div>
+               <div hide-xs flex style="height: 120px;"></div>
+            </div>
+            <md-divider></md-divider>
+            <div class="" flex layout="row" layout-sm="column" layout-xs="column" style="background-color: #00BCD5;">
+               <div flex class="">
+                  <img src="src/img/others/seo.png" style="width: 100%">
+               </div>
+               <div flex class="big-padding" >
+                  <span style="font-weight: 300; color: white;" class="md-display-1">Um chat e o Google</span>
+                  <p class="md-title" style="font-weight: 300; color: white;">Imagine seus clientes acessando o seu site para fazer contato com a sua empresa. 
+                  </p>
+                  <p  class="md-title" style="font-weight: 300; color: white;">É comprovado que 87% das pessoas procuram sites no Google os sites que desejam acessar, o mesmo ocorre com o Facebook.
+                  </p>
+                  <p class="md-title"  style="font-weight: 300; color: white;">Cada vez que um cliente procura pelo seu domínio no Google e clica nele, o motores de buscas interpretam isso com o aumento de importância do seu domínio no sistema de busca.
+                  </p>
+               </div>
+            </div>
+            <div class="" flex layout="row" layout-sm="column" layout-xs="column">
+               <div flex class="big-padding ">
+                  <div flex class="">
+                     <span style="font-weight: 300; color: #757575;" class="md-display-1">Uma imagem profissional</span>
+                     <p class="md-title" style="font-weight: 300; color: #757575;">
+                        Usar uma ferramenta em seu próprio site é fazer com que seu cliente sempre veja sua empresa na internet. 
+                     </p>
+                     <p  class="md-title" style="font-weight: 300; color: #757575;">Use boas práticas no atendimento para o cliente dentro da sua empresa online, isso resultará em uma perfeita imagem do seu negócio para seu cliente.
+                     </p>
+                  </div>
+               </div>
+               <div flex class="md-whiteframe-6dp">
+                  <img src="src/img/others/crm.jpg" style="width: 100%">
+               </div>
+            </div>
+            <div class="introdiv" flex layout="column" style="background-image: url('src/img/bg-mid.jpg');">
+               <div flex class="big-padding" layout="row" layout-align="center">
+                  <span style="font-weight: 300; color: #757575;" class="md-display-1">Entenda melhor o por que se relacionar com seus clientes</span>
+               </div>
+               <div  class="big-padding">
+                  <p class="md-title"  style="font-weight: 300; color: #757575; text-align: center;">Mantes uma boa relação com seus clientes é sinônimo de ser lembrado. Sejamos sinceros, o Brasil não está no melhor ranking em qualidade de atendimento a clientes, então quem faz diferente ganha um alto destaque.
+                  </p>
+                  <p class="md-title"  style="font-weight: 300; color: #757575; text-align: center;">
+                     Manter a relação, do cliente com um único vendedor, facilita a mecânica da venda uma vez que o atendente já prestou atendimento para o mesmo cliente e pode analisar rapidamente como foi o andamento do atendimento anterior
+                  </p>
+                     <p flex class="md-display-1" style="font-weight: 300;text-align: center;" >Experimente a nossa API e veja como ficaria em seu site</p>
+                  <div flex layout="row" style="min-height: 560px" layout-padding>
+                  <span flex></span>
+                     <iframe id='ControlIframe' frameborder='0' width='320px' scrolling='no' src='api/chat.html#56ddea769c22b0f01934c232' flex style='width: 100%;'></iframe>
+                     <span flex></span>
+                  </div>
+               </div>
+            </div>
+            <div ng-include="'template/root/includes/footer.html'"></div>
+         </div>
+      </md-content>
+   </div>
+</div>

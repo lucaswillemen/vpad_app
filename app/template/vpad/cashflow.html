@@ -1,0 +1,163 @@
+<style type="text/css">
+    .md-datepicker-calendar-icon {
+        fill: rgb(3, 155, 229) !important;
+    }
+    
+    .text-black {
+        color: black!important;
+    }
+    
+    @media print {
+        table {
+            page-break-after: auto
+        }
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto
+        }
+        td {
+            page-break-inside: avoid;
+            page-break-after: auto
+        }
+        thead {
+            display: table-header-group
+        }
+        tfoot {
+            display: table-footer-group
+        }
+    }
+    tr.md-warn, md-list-item.md-warn {
+    background-color: #FFCDD2;
+}
+    tr.md-accent, md-list-item.md-accent {
+    background-color: #C8E6C9;
+}
+</style>
+<div layout="column" flex>
+    <md-toolbar class="md-table-toolbar md-default">
+        <div class="md-toolbar-tools">
+            <h2 class="md-title">{{i18n.financial.cashflow.title}} </h2>
+        </div>
+    </md-toolbar>
+    <div layout="column" layout-gt-sm="row" id="char">
+        <md-card flex>
+            <md-subheader class="md-title md-no-sticky">Detalhes</md-subheader>
+            <md-list>
+                <md-divider></md-divider>
+                <md-list-item class="">
+                    <p>Total das movimentações: </p>
+                    {{total | currency: "R$ "}}
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item class="md-accent">
+                    <p>Receita: </p>
+                    {{receita | currency: "R$ "}}
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-list-item class="md-warn">
+                    <p>Despesa: </p>
+                    {{despesa | currency: "R$ "}}
+                </md-list-item>
+                <md-divider></md-divider>
+            </md-list>
+            <div><canvas id="myChart" height="auto"></canvas></div>
+        </md-card>
+        <md-card flex>
+            <md-subheader class="md-title md-no-sticky">Opções</md-subheader>
+            <div layout-padding layout="column">
+                <md-input-container>
+                    <label>Período</label>
+                    <md-select ng-model="pre_date_select" placeholder="Filtro" ng-change="pre_date()" style="margin:0px" hide-print>
+                        <md-option value="hoje">Hoje</md-option>
+                        <md-option value="semana">Semana atual</md-option>
+                        <md-option value="mes">Mês atual</md-option>
+                    </md-select>
+                </md-input-container>
+                <div layout="column" layout-gt-sm="row" flex>
+                    <div layout="column" flex>
+                        <label>A partir da data: </label>
+                        <md-datepicker ng-model="data_filter.start" md-placeholder="{{i18n.products.fields.validate}}" ng-change="recharge()">{{i18n.products.fields.validate}}</md-datepicker>
+                    </div>
+                    <div layout="column" flex>
+                        <label>Até a data:</label>
+                        <md-datepicker ng-model="data_filter.end" md-placeholder="{{i18n.products.fields.validate}}" ng-change="recharge()">{{i18n.products.fields.validate}}</md-datepicker>
+                    </div>
+                </div>
+            </div>
+            <div layout="column" layout-gt-sm="row">
+                <div layout-align="center center" layout="row" flex>
+                    <md-button class="md-raised md-primary" ng-click="print();" hide-print hide-xs flex>
+                        <md-icon md-svg-icon="printer"></md-icon> Imprimir</md-button>
+                </div>
+                <md-input-container md-no-float hide-print style="margin-top: 36px;" flex>
+                    <md-icon md-svg-icon="account-search" style="fill:#757575"></md-icon>
+                    <input ng-model="filter.search" class="md-dark" id="sfocus" placeholder="{{i18n.basic.search}}" flex md-autofocus>
+                </md-input-container>
+            </div>
+            <md-button class="md-raised md-success" hide-print ng-click="movimentarfluxo($event, 'adicionar')">Adicionar dinheiro</md-button>
+            <md-button class="md-raised md-warn" hide-print ng-click="movimentarfluxo($event, 'remover')">Retirar dinheiro</md-button>
+        </md-card>
+    </div>
+    <md-card style="margin-top:10px">
+        <table md-table md-progress="promise_table" flex>
+            <thead fix-head md-head md-order="query.order" md-on-reorder="logOrder">
+                <tr md-row>
+                    <th md-column md-order-by="registro"><span>{{i18n.report.sales.fields.dataregistro}}</span></th>
+                    <th md-column md-order-by="data.valor"><span>{{i18n.report.sales.fields.valor}}</span></th>
+                    <th md-column md-order-by="data.desc"><span>Descrição</span></th>
+                </tr>
+            </thead>
+            <tbody md-body>
+                <tr md-row ng-repeat="cash in pdv | filter: filter.search | orderBy: query.order | limitTo: query.limit : (query.page -1) * query.limit" 
+                ng-class="cash.data.valor < 0 ? 'md-warn' : 'md-accent'" >
+                    <td md-cell>{{cash.registro | date: "dd/MM/yyyy - HH:mm"}}</td>
+                    <td md-cell>{{cash.data.valor | currency: "R$ "}}</td>
+                    <td md-cell>{{cash.data.desc}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{pdv.length}}" md-limit-options="[5, 10, 15, 30, 100]" hide-print></md-table-pagination>
+    </md-card>
+</div>
+<div style="visibility: hidden">
+    <div class="md-dialog-container" id="movimentar">
+        <md-dialog flex-xs="95" flex-sm="80" flex-md="60" flex-lg="60" flex-xl="50">
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2>{{data_mov_text.title}}</h2>
+                    <span flex></span>
+                    <md-button class="md-icon-button" ng-click="cancel()">
+                        <md-icon md-svg-icon="close">
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <form name="formMovimentar" , ng-submit="movimentar()">
+                <md-dialog-content layout-padding>
+                    <div layout-gt-sm="column">
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>{{data_mov_text.filed}}</label>
+                            <input ng-model="data_mov.valor" ui-money-mask required>
+                        </md-input-container>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Descrição</label>
+                            <input ng-model="data_mov.desc" name="desc" required>
+                            <div ng-messages="formMovimentar.desc.$error">
+                                <div ng-message="required">Informe uma descrição.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </md-dialog-content>
+                <md-dialog-actions layout="row">
+                    <md-button class="" type='button' ng-click="cancel()">
+                        {{i18n.basic.cancel}}
+                    </md-button>
+                    <span flex></span>
+                    <md-progress-circular md-mode="indeterminate" ng-show="formUpdate.$submitted" md-diameter="20"></md-progress-circular>
+                    <md-button class="md-raised" ng-class="data_mov_text.tipe == 'adicionar' ? 'md-success' : 'md-warn'" type="submit" ng-disabled="formMovimentar.$invalid || formUpdate.$submitted">
+                        {{data_mov_text.tipe}}
+                    </md-button>
+                </md-dialog-actions>
+            </form>
+        </md-dialog>
+    </div>
+</div>

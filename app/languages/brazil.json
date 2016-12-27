@@ -1,0 +1,446 @@
+{
+
+    "formatDate": {
+        "shortMonths": ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"]
+    },
+    "currency": "R$ ",
+    "ad": "Seja vem vindo ao vPad 4",
+    "login_error": "Usuário ou senha incorreto!",
+    "menu": {
+        "dashboard": {
+            "name": "Administração",
+            "users": "Usuários",
+            "config": "Configuração",
+            "fatura": "Faturas",
+            "titulo": "Títulos"
+        },
+        "registers": {
+            "name": "CADASTROS",
+            "customer": "Clientes",
+            "product": "Produtos",
+            "service": "Serviços",
+            "vendor": "Fornecedores",
+            "carrier": "Transportadoras"
+        },
+        "operational": {
+            "name": "OPERACIONAL",
+            "saler": "Vendas",
+            "purchases": "Compras",
+            "service": "Serviços",
+            "os": "Ordem de serviço",
+            "budget": "Orçamento",
+            "pos": "PDV"
+        },
+        "accounting": {
+            "name": "FINANCEIRO",
+            "topay": "Contas a pagar",
+            "toreceive": "Contas a receber",
+            "flux": "Fluxo do caixa"
+        },
+        "control": {
+            "name": "CONTROLE",
+            "users": "Usuários",
+            "company": "Empresas",
+            "partner": "Parceiros",
+            "inventory": "Estoque"
+        },
+        "report": {
+            "name": "RELATÓRIOS",
+            "customer": "Clientes cadastrados",
+            "product": "Movimentação do estoque",
+            "service": "Serviços executados",
+            "cash": "Movimentação financeira",
+            "account": "Transação de contas",
+            "sales": "Relatório de vendas"
+        }
+    },
+    "profile": {
+        "title": "Atualizar perfil",
+        
+        "fields": {
+            "feedback": "Alertas",
+            "contact": "Contatos",
+            "message": "Mensagens",
+            "fast": "Venda rápida",
+            "logout": "Sair",
+            "country": {
+                "name": "USA",
+                "link": "en"
+            }
+        }
+    },
+    "painel": {
+        "panel": {
+            "feedback": "Alertas",
+            "contact": "Contatos",
+            "client": "Clientes",
+            "service": "Serviços",
+            "message": "Mensagens",
+            "develop": "Desenvolvedor",
+            "fast": "Venda rápida",
+            "logout": "Sair",
+            "country": {
+                "name": "USA",
+                "link": "en"
+            }
+        }
+    },
+    "subpainel": {
+        "panel": {
+            "pay": "Contas a pagar",
+            "receive": "Contas a receber",
+            "revenue": "Receita mensal",
+            "expense": "Despesa mensal",
+            "cashier": "Caixa",
+            "forecasting": "Previsão do caixa",
+            "vital": "Fluxo vital"
+        }
+    },
+    "home": {
+        "text": {
+            "one": "Evolução do caixa",
+            "two": "Cadastro de novos clientes",
+            "three": "Movimentação do estoque",
+            "four": "Clientes que mais compraram",
+            "five": "Clientes que mais gastaram",
+            "six": "Clientes com maior adinplencia",
+            "seven": "Clientes com maior inadinplencia",
+            "recipe": "Receita",
+            "expense": "Despesa",
+            "cashier": "Caixa"
+        }
+    },
+    "customers": {
+        "title": "Clientes",
+        "add": "Adicionar novo cliente",
+        "text_add1": "Cadastre o email do cliente para que ele possa ter acesso exclusivo ao nosso APP.",
+        "text_add2": "Caso o cliente já possua cadastro, todas as informações serão carregadas automaticamente.",
+        "text_add3": "Se não quiser vincular o cliente ao acesso externo, clique em pular.",
+        "text_add4": "Este cliente já está cadastrado, confira os dados antes de adicionar.",
+        "text_add5": "Uma conta será criada para o email abaixo, o cliente deverá informar sua senha em seu primeiro acesso.",
+        "text_add6": "Esse cliente ainda não foi cadastrado no sistema, complete as informações.",
+        "text_sync1": "Esse email já está cadastrado.",
+        "text_sync2": "Confira as informações e clique em adicionar.",
+        "text_sync3": "Você poderá completar o cadastro desse cliente depois.",
+        "text_sync4": "Esse email ainda não está cadastrado.",
+        "text_sync5": "Informe uma senha inicial para o acesso do cliente.",
+        "edit": {
+            "tab_1": "informações básicas",
+            "tab_2": "dados complementares",
+            "tab_3": "localização"
+        },
+        "delet": {
+            "confirm": "Tem certeza que deseja desvincular esse cliente?",
+            "text": "Você ainda poderá adicionar ele novamente quando quiser."
+        },
+        "fields": {
+            "profession": "Profissão",
+            "education": "Escolaridade",
+            "cpf": "CPF",
+            "rg": "RG",
+            "state": "Estado",
+            "street": "Endereço",
+            "zip": "CEP",
+            "number": "Número",
+            "neighborhood": "Bairro",
+            "sex": "Sexo",
+            "birth": "Nascimento"
+        },
+        "table": {
+            "name": "Nome do cliente"
+        }
+    },
+    "products": {
+        "title": "Produtos",
+        "add": "Adicionar novo produto",
+        "edit": {
+            "tab_1": "informações básicas",
+            "tab_2": "dados complementares",
+            "tab_3": "informações de compra",
+            "tab_4": "informações fiscais",
+            "tab_5": "informações tributáveis"
+        },
+        "delet": {
+            "confirm": "Tem certeza que deseja excluir esse produto?",
+            "text": "Esse produto será eliminado do banco de dados"
+        },
+        "legends": {
+            "first": "Dados do produto",
+            "second": "Estoque",
+            "prazo": "Contagem dos prazos",
+            "third": "Validade e Lote",
+            "buyer": "Informações de compra",
+            "seller": "Informações de venda"
+            },
+        "fields": {
+            "name": "Nome do produto",
+            "codbarras": "Código de barras",
+            "pricesell": "Valor de venda",
+            "min_qntd": "Estoque mínimo",
+            "pricebuy": "Valor de compra",
+            "qntd": "Estoque inicial",
+            "estoque": "Estoque",
+            "brand": "Marca",
+            "model": "Modelo",
+            "vendor": "Fornecedor",
+            "carrier": "Transportadora",
+            "ncm": "Código NCM",
+            "cfop": "Código CFOP",
+            "valor_tri": "Valor tributável",
+            "icms_origem": "ICMS de origem",
+            "icms_tribu": "ICMS Tribuável",
+            "icms_aliquota": "Aliquota",
+            "unitri": "Unidade tribuável",
+            "unicom": "Unidade comercial",
+            "validate": "Validade",
+            "lote":"Lote"
+
+        },
+        "table": {
+            "name": "Nome do produto",
+            "price": "Preço",
+            "qntd": "Estoque",
+            "pricesell": "Valor de venda",
+            "estoque": "Estoque"
+        }
+    },
+    "users": {
+        "title": "Usuários",
+        "add": "Adicionar novo usuário",
+        "text_add1": "Adicione usuários para conceder acesso ao sistema para outras pessoas.",
+        "text_add2": "Espefique as permições corretamente para o usuário.",
+        "edit": {
+            "tab_1": "informações básicas",
+            "tab_2": "dados complementares",
+            "tab_3": "informações de compra",
+            "tab_4": "informações fiscais",
+            "tab_5": "informações tributáveis"
+        },
+        "delet": {
+            "confirm": "Tem certeza que deseja excluir esse usuário?",
+            "text": "Esse produto será eliminado do banco de dados"
+        },
+        "legends": {
+            "first": "Dados do produto",
+            "second": "Estoque",
+            "prazo": "Contagem dos prazos",
+            "third": "Validade e Lote",
+            "buyer": "Informações de compra",
+            "seller": "Informações de venda"
+            },
+        "fields": {
+            "name": "Nome do produto",
+            "codbarras": "Código de barras",
+            "pricesell": "Valor de venda",
+            "min_qntd": "Estoque mínimo",
+            "pricebuy": "Valor de compra",
+            "qntd": "Estoque inicial",
+            "estoque": "Estoque",
+            "brand": "Marca",
+            "model": "Modelo",
+            "vendor": "Fornecedor",
+            "carrier": "Transportadora",
+            "ncm": "Código NCM",
+            "cfop": "Código CFOP",
+            "valor_tri": "Valor tributável",
+            "icms_origem": "ICMS de origem",
+            "icms_tribu": "ICMS Tribuável",
+            "icms_aliquota": "Aliquota",
+            "unitri": "Unidade tribuável",
+            "unicom": "Unidade comercial",
+            "validate": "Validade",
+            "lote":"Lote"
+
+        },
+        "table": {
+            "name": "Nome do usuário",
+            "price": "Preço",
+            "qntd": "Estoque",
+            "pricesell": "Valor de venda",
+            "estoque": "Estoque"
+        }
+    },
+    "services": {
+        "add": "Abrir novo serviço",
+        "title": "Serviços",
+        "add": "Adicionar novo serviço",
+        "delet": {
+            "confirm": "Tem certeza que deseja excluir esse serviços?",
+            "text": "Essas informações serão excluídos do banco de dados."
+        },
+        "legends": {
+            "first": "Dados do serviço",
+            "second": "Prazos",
+            "prazo": "Contagem dos prazos"
+            },
+        "fields": {
+            "name": "Nome do serviço",
+            "price": "Valor",
+            "buyer": "Custo",
+            "time": "Tempo de execução",
+            "prazo":"Prazo",
+            "custo_op": "Custo operational",
+            "custo_ds": "Valor de deslocamento"
+        },
+        "table": {
+            "name": "Nome do serviço",
+            "price": "Valor"
+        }
+    },
+    "newservices": {
+        "add": "Abrir novo serviço",
+        "title": "Iniciar novo serviço",
+        "add": "Adicionar novo serviço",
+        "delet": {
+            "confirm": "Tem certeza que deseja excluir esse serviços?",
+            "text": "Você poderá recuperar as informações depois."
+        },
+        "fields": {
+            "name": "Nome do serviço",
+            "price": "Valor",
+            "buyer": "Custo",
+            "time": "Tempo"
+
+        },
+        "table": {
+            "name": "Nome do serviço",
+            "price": "Valor"
+        }
+    },
+    "vendors": {
+        "title": "Fornecedores",
+        "add": "Adicionar novo fornecedor",
+        "delet": {
+            "confirm": "Tem certeza que deseja excluir esse fornecedor?",
+            "text": "Você poderá recuperar as informações depois."
+        },
+        "fields": {
+            "name": "Nome fornecedor",
+            "contact": "Contato",
+            "site": "Site",
+            "cell_contact": "Celular do contato"
+
+        },
+        "legends": {
+            "first": "Dados do fornecedor",
+            "second": "Localização",
+            "prazo": "Contagem dos prazos"
+        },
+        "table": {
+            "name": "Nome do fornecedor",
+            "contact": "Pessoa de contato"
+        }
+    },
+    "carriers": {
+        "title": "Transportadora",
+        "add": "Adicionar novo transportadora",
+        "delet": {
+            "confirm": "Tem certeza que deseja excluir essa transportadora?",
+            "text": "Você poderá recuperar as informações depois."
+        },
+        "fields": {
+            "name": "Nome da transportadora",
+            "contact": "Contato",
+            "site": "Site"
+
+        }
+    },
+    "sellers": {
+        "title": "Vendas",
+        "fields": {
+            "nomepaciente": "Nome",
+            "pagamento": "Pagamento",
+            "valortotal": "Valor",
+            "dataregistro": "Data"
+        }
+    },
+    "pdv": {
+        "title": "Ponto de vendas",
+        "fields": {
+            "nomepaciente": "Nome",
+            "pagamento": "Pagamento",
+            "valortotal": "Valor",
+            "dataregistro": "Data"
+        },
+        "legends":{
+            "payment": "Opções de pagamento",
+            "type_pay": "Tipo de pagamento"
+        }
+    },
+    "report":{
+        "sales":{
+            "title": "Relatório de vendas",
+            "fields": {
+                "valor": "Valor",
+                "dataregistro": "Data"
+            }
+        }
+    },
+    "financial":{
+        "cashflow":{
+            "title": "Fluxo de caixa",
+            "fields": {
+                "valor": "Valor",
+                "dataregistro": "Data"
+            }
+        }
+    },
+    "buyer": {
+        "title": "Compras",
+        "add": "Novo pedido de compra",
+        "fields": {
+            "nome": "Nome",
+            "fornecedor": "Fornecedor",
+            "valor": "Valor",
+            "dataregistro": "Data"
+        }
+    },
+    "basic": {
+        "storn": "Estornar venda",
+        "name": "Nome",
+        "email": "Email",
+        "city": "Cidade",
+        "cell": "Celular",
+        "phone": "Telefone",
+        "options": "Opções",
+        "delete": "Excluir",
+        "edit": "Alterar",
+        "new": "Novo",
+        "share": "Compartilhar",
+        "cancel": "Cancelar",
+        "save": "Salvar",
+        "sarch": "Procurar",
+        "confirm": "Confirmar",
+        "search": "Procurar",
+        "next": "Próximo",
+        "skip": "Pular",
+        "add": "Adicionar",
+        "back": "Voltar",
+        "password": "Senha",
+        "masc": "Masculino",
+        "fem": "Feminino",
+        "category": "Categoria",
+        "desc": "Descrição",
+        "selected": "Selecionado",
+        "line": "Linha",
+        "lines": "Linhas",
+        "type": "Tipo",
+        "hour": "Hora",
+        "day":"Dia",
+        "business_id": "CNPJ",
+        "delet": {
+            "confirm": "Tem certeza que deseja desvincular esse cliente?",
+            "text": "Você ainda poderá adicionar ele novamente quando quiser."
+        },
+
+        "made": "Fez",
+        "purchases": "Compras",
+        "spent": "Gastou",
+        "cur": "Reais",
+        "paid": "Pagou",
+        "overdue": "Contas em atraso",
+        "vista": "A vista",
+        "parcelado": "Parcelado"
+
+    }
+}

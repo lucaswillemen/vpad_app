@@ -1,0 +1,104 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="conversa" layout="column" flex >
+   <md-toolbar>
+      <div class="md-toolbar-tools">
+         <md-button class="md-icon-button" aria-label="Settings" ng-click="buildToggler('conversa')">
+                <md-icon md-svg-icon="arrow-left">
+         </md-button>
+         <h2>
+            <span>Conversa</span>
+         </h2>
+      </div>
+   </md-toolbar>
+ <div >
+            <md-card-header flex> 
+               <md-card-header-text>
+                  <span class="md-title" >{{nome_first}}</span>
+                  <span class="md-subhead" ng-repeat="user in conversa.usuarios">{{user.nome}}</span>
+               </md-card-header-text>
+               
+               <!--<md-menu md-position-mode="target-right target">
+                  <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="$mdOpenMenu(ev);">
+                     <md-icon class="material-icons md-dark">menu</md-icon>
+                  </md-button>
+                  <md-menu-content width="4" >
+                     <md-menu-item>
+                        <md-button >
+                           <md-icon class="material-icons md-dark">web</md-icon>
+                           Acessar o vSync
+                        </md-button>
+                     </md-menu-item>
+                     <md-menu-divider></md-menu-divider>
+                     <md-menu-item>
+                        <md-button ng-click="logout()">
+                           <md-icon class="material-icons md-dark">close</md-icon>
+                           Desconectar
+                        </md-button>
+                     </md-menu-item>
+                  </md-menu-content>
+               </md-menu>-->
+            </md-card-header>
+            <md-divider ></md-divider>
+         </div>
+                     <div flex layout="column" layout-align="end none " 
+            style="background:white;" 
+            flow-init="{target: 'http://api.vectorgray.com.br/chat/uploads/', testChunks:false}"
+            flow-file-success="completeUpload( $file, $message, $flow )"
+            flow-complete="$flow.cancel()">
+            <md-content style="background:white" scroll-glue>
+               <div ng-repeat="ms in msg.msg">
+                  <span ng-if="msg.msg[$index-1].nome != ms.nome" class="md-padding md-subhead"><b>{{ms.nome}}</b></span>
+               <md-card ng-if="ms.type == 'txt'" style="padding: 12px">
+                  <span class="md-body-1">{{ms.msg}}</span>
+               </md-card>
+               <md-card layout="row" ng-if="ms.type == 'img'">
+                  <img style="height: 100%;" ng-src="{{ms.msg}}" flex/>
+               <md-card-actions layout="column">
+                  <md-button class="md-icon-button"><md-icon class="material-icons md-dark">file_download</md-icon></md-button>
+                  <md-button class="md-icon-button"><md-icon class="material-icons md-dark">share_arrow</md-icon></md-button>
+                </md-card-actions>
+               </md-card>
+               </div>
+               <span id="profinal"></span>
+            </md-content>
+               <md-divider ></md-divider>
+            <div ng-show="$flow.files.length == 0" class="md-padding">
+               <div layout="row " >
+                  <md-input-container flex style="height: auto;margin-bottom: -30px;">
+                     <textarea ng-disabled="!msg._id" ng-model="data.msg" type="text" placeholder="Mensagem" name="senha" ng-enter="vclient_send()" autofocus></textarea>
+                     
+                  </md-input-container>
+               </div>
+            </div>
+            <div ng-show="$flow.files.length != 0" >
+               <md-divider ></md-divider>
+                  <p class="md-title md-padding" ><b>Arquivos para enviar</b></p>
+               <div layout="row">
+                  <md-card ng-repeat="file in $flow.files" flex>
+                  <div class="md-media-xl card-media">
+                     <img flow-img="file" />
+                  </div><span flex></span>
+                     <md-progress-linear md-mode="determinate" value="{{file.progress()*100}}"></md-progress-linear>
+                  </md-card>
+               </div>
+            </div>
+            <div>
+               <div layout="row" layout-align="end none" class="md-padding" >
+                  <md-button type="button" class="md-icon-button md-raised" ng-click="$flow.cancel()" ng-show="$flow.files.length != 0">
+                     <md-icon class="material-icons md-dark">close</md-icon>
+                  </md-button>
+                  <md-button type="button" class="md-icon-button md-raised" flow-btn>
+                     <i class="material-icons md-dark">photo</i>
+                  </md-button>
+                  <md-button type="button" class="md-icon-button md-raised" ng-show="$flow.files.length != 0" ng-click="$flow.upload()">
+                     <i class="material-icons md-dark">send</i>
+                  </md-button>
+                  <md-button type="button" class="md-icon-button md-raised" ng-hide="$flow.files.length != 0" ng-click="vclient_send()">
+                     <i class="material-icons md-dark">send</i>
+                  </md-button>
+               </div>
+               <md-progress-linear md-mode="indeterminate" ng-show="!msg.msg || sending_msg || $flow.isUploading()" md-diameter="40" style="position:fixed;bottom:0px">
+               </md-progress-linear >
+            </div>
+         </div>
+            
+         </md-sidenav>

@@ -1,0 +1,181 @@
+<style type="text/css">
+    .md-autocomplete-suggestions li {
+        border-bottom: 1px solid #ccc;
+        height: auto;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        white-space: normal;
+    }
+    
+    .md-autocomplete-suggestions li:last-child {
+        border-bottom-width: 0;
+    }
+    
+    .item-title,
+    .item-metadata {
+        display: block;
+        line-height: 2;
+    }
+    
+    .item-title md-icon {
+        height: 18px;
+        width: 18px;
+    }
+    
+    .animate-hide {
+        height: auto !important;
+    }
+</style>
+<div ng-hide="myValue" class='animate-hide'>
+    <div layout="column" flex class="notprintt">
+        <md-toolbar class="md-table-toolbar md-primary">
+            <div class="md-toolbar-tools">
+                <h2 class="md-title">{{text.pdv.title}} </h2>
+                <div flex></div>
+            </div>
+            <span flex></span>
+        </md-toolbar>
+    </div>
+    <md-content layout-padding layout-gt-sm="row">
+        <fieldset class="standard" flex>
+            <legend>Produtos</legend>
+            <div>
+                <md-checkbox ng-model="data_service.budget" ng-init="">Vincular cliente</md-checkbox>
+                <p ng-hide="!data_service.budget">Selecione um dos clientes da sua lista.</p>
+                <md-autocomplete ng-hide="!data_service.budget" required name="cliente" autofocus ng-model="dddsdasd" id="Auto" md-selected-item="item" md-selected-item-change="add_client(item)" md-search-text="filter" md-items="item in clientes | filter: filter" md-item-text="item.dados.nome" md-min-length="3" placeholder="Informe as 3 primeiras letras do nome">
+                    <md-item-template>
+                        <span class="item-title">
+                        <md-icon md-svg-icon="account-multiple-outline"></md-icon>
+                        <span> {{item.dados.nome}} </span>
+                        </span>
+                        <span class="item-metadata">
+                        <span class="item-metastat">
+                           <strong>{{item.dados.email}}</strong>
+                        </span>
+                        </span>
+                    </md-item-template>
+                    <md-not-found flex>
+                        <div ng-click="popupaddNovo(); hidecoments()">Adcionar novo cliente</div>
+                    </md-not-found>
+                    <div ng-messages="os.cliente.$error">
+                        <div ng-message="required">Informe o nome do cliente</div>
+                    </div>
+                </md-autocomplete>
+            </div>
+            <div>
+                <p>Escolha um dos produtos da sua lista.</p>
+                <md-autocomplete required name="produto" md-selected-item="item_prod" md-selected-item-change="select_prod(item)" md-search-text="filter_prod" md-items="item in produtos | filter: filter_prod" md-item-text="item.dados.nome" placeholder="Informe as 3 primeiras letras do nome">
+                    <md-item-template>
+                        <span class="item-title">
+                        <span> {{item.dados.nome}} </span> - <strong>{{item.dados.pricesell | currency: 'R$ '}}</strong>
+                        </span>
+                        <span class="item-metadata">
+                        <span class="item-metastat">
+                           {{item.dados.qntd}} em estoque
+                        </span>
+                        </span>
+                    </md-item-template>
+                    <md-not-found flex>
+                        <div>Nenhum produto encontrado</div>
+                    </md-not-found>
+                    <div ng-messages="os.produto.$error">
+                        <div ng-message="required">Informe o nome do produto</div>
+                    </div>
+                </md-autocomplete>
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block">
+                        <label>Quantidade</label>
+                        <input ng-model="selected_prod.qntd" name="name" required type="number">
+                        <div ng-messages="vendorForm.name.$error">
+                            <div ng-message="required">Informe a quantidade do produto.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Valor</label>
+                        <input ng-model="selected_prod.dados.pricesell" name="name" readonly="" type="text" ui-money-mask="2">
+
+                    </md-input-container>
+                    <md-button ng-click="add_prod()" class="md-raised md-primary">Adicionar</md-button>
+                </div>
+            </div>
+
+
+        </fieldset>
+        <fieldset flex>
+            <legend>Resumo</legend>
+            <p class="md-headline" style="text-align: center" ng-hide="subtotal_prod" hide-sm hide-xs>Use a painel da esquerda para adicionar produtos ao carrinho de compra</p>
+            <p class="md-headline" style="text-align: center" ng-hide="subtotal_prod" hide-gt-sm>Use a painel acima para adicionar produtos ao carrinho de compra</p>
+            <div ng-show="subtotal_prod">
+                <h3>Total: {{subtotal_prod | currency: ' R$ '}} </h3>
+                <div ng-repeat="prod in data.produtos" layout="column">
+                    <span>{{prod.nome}}</span>
+                    <div layout="row" layout-align="center center">
+                        <span>{{prod.qntd}} x </span> <span>{{prod.price | currency: ' R$ '}}</span><span flex></span>
+                        <span>{{prod.price*prod.qntd | currency: 'R$ '}}</span>
+
+                        <md-button class="md-icon-button">
+                            <md-icon md-svg-icon="close" ng-click='remove_prod($index)'></md-icon>
+                        </md-button>
+                    </div>
+                    <md-divider></md-divider>
+                </div>
+                <div layout="row">
+                    <md-button class="md-raised md-primary" flex ng-click="myValue=true">Fechar venda </md-button>
+                    <md-button class="md-raised md-warn" flex ng-click="reset('integ')">Recomeçar </md-button>
+                </div>
+            </div>
+        </fieldset>
+    </md-content>
+</div>
+
+<md-content class='animate-hide' ng-show="myValue">
+    <form name="servForm" ng-submit="cadastrar()" novalidade>
+        <div layout-padding layout="row" layout-xs="column">
+            <fieldset flex>
+                <legend>{{text.pdv.legends.payment}}</legend>
+                <h2>Total: {{subtotal_prod | currency: ' R$ '}} </h2>
+                <p ng-show="data_service.type!='maintenance'">{{text.pdv.legends.type_pay}} <span class="radioValue"></span> </p>
+                <md-radio-group ng-model="data.dados.type_pay" ng-init="data.dados.type_pay='vista'">
+                    <md-radio-button value="vista">{{text.basic.vista}}</md-radio-button>
+                    <md-radio-button value="parc">{{text.basic.parcelado}}</md-radio-button>
+                </md-radio-group>
+                <md-checkbox ng-model="data_pdv.nota" ng-init="data_pdv.nota=true">Emitir comprovante ao concluir venda?</md-checkbox>
+                <md-checkbox ng-model="data_pdv.email">Enviar comprovante por email?</md-checkbox>
+
+                <md-input-container class="md-block" flex ng-if="data_pdv.email">
+                    <label>Email do cliente</label>
+                    <input ng-model="data.dados.min_qntd" type="email">
+                </md-input-container>
+            </fieldset>
+            <fieldset flex>
+                <legend>{{text.services.legends.second}}</legend>
+
+                <p ng-show="data_service.type!='maintenance'" ng-hide="data.dados.type_pay=='parc'">{{text.pdv.legends.type_pay}} <span class="radioValue"></span> </p>
+                <md-radio-group ng-model="data.dados.type_mode" ng-init="data.dados.type_mode='cash'" ng-hide="data.dados.type_pay=='parc'">
+                    <md-radio-button value="cash">Dinheiro</md-radio-button>
+                    <md-radio-button value="card">Cartão</md-radio-button>
+                </md-radio-group>
+                <p ng-show="data.dados.type_pay=='parc'">Parcelas</p>
+                <md-radio-group ng-model="data.dados.parc" ng-show="data.dados.type_pay=='parc'">
+                    <md-radio-button ng-repeat="p in parcs" value="{{p}}">{{p}}x de {{subtotal_prod/p | currency: ' R$ '}}</md-radio-button>
+                </md-radio-group>
+                <br>
+
+                <md-input-container class="md-block" flex ng-show="data.dados.type_mode=='cash' && data.dados.type_pay!='parc'">
+                    <label>Valor pago</label>
+                    <input ng-model="data.dados.peyed" type="text" ui-money-mask="2">
+                    <span ng-show="data.dados.peyed > subtotal_prod">Troco: {{data.dados.peyed - subtotal_prod | currency: ' R$ '}}</span>
+                </md-input-container>
+            </fieldset>
+        </div>
+        <div layout="row" layout-align="center center">
+            <md-button type="button" class="md-raised md-block" ng-click="myValue=false">
+                <md-icon md-svg-icon="keyboard-backspace"></md-icon>
+                {{text.basic.back}}
+            </md-button>
+            <span flex></span>
+            <md-progress-circular md-mode="indeterminate" ng-show="servForm.$submitted" md-diameter="20"></md-progress-circular>
+            <md-button class="md-raised md-primary md-block" ng-click="close()"> {{text.basic.save}}</md-button>
+        </div>
+    </form>
+</md-content>

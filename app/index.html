@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<script type="text/javascript">
+    window.version = "000.1"
+    if (window.location.href.split("/")[2] == "localhost") {
+        window.domain = "http://vectorgray.com.br/api/"
+        window.ws = "https://localhost:3000"
+        window.config_base = {
+            "facebook_id": '836611273093285',
+            "analytcs_id": 'UA-84557921-1',
+            "facebook_pixel": '1087283108045883'
+        }
+    } else {
+        window.domain = "http://vectorgray.com.br/api/"
+        window.ws = "https://vpad.com.br:3000"
+        window.config_base = {
+            "facebook_id": '477671339059870',
+            "analytcs_id": 'UA-84557921-1',
+            "facebook_pixel": '1087283108045883'
+        }
+    };
+</script>
+<html lang="pt-br">
+<head>
+<title>vPad - App</title>
+<meta name="description" content="A melhor experiência em gestão de clientes." />
+<meta charset=utf-8>
+
+<link rel="icon" href="src/img/logo_icon/favicon.ico">
+<meta name="robots" content="index,follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="theme-color" content="#039BE5">
+
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="http://vpad.com.br">
+<meta property="og:title" content="vPad - App">
+<meta property="og:site_name" content="vPad - App">
+<meta property="og:description" content="Uma nova experiência para gestão em empresas">
+<meta property="og:image" content="http://www.vectorgray.com.br/vpad4/src/img/og/vpad4.png?qwe">
+<meta property="og:image:type" content="image/png">
+<meta property="fb:app_id" content="477671339059870" />
+
+<link rel="stylesheet" type="text/css" href="src/css/angular-material.css">
+<link rel="stylesheet" type="text/css" href="src/css/angular-datatable.css">
+<link rel="stylesheet" type="text/css" href="src/css/angular-text.css">
+<link rel="stylesheet" type="text/css" href="src/css/angular-chart.css">
+<link rel="stylesheet" type="text/css" href="src/css/style.css">
+<link rel="stylesheet" type="text/css" href="src/css/sweetalert.css">
+
+<style type="text/css">
+    #thm_mp_cntnr{
+        position: fixed;
+    }
+</style>
+
+<script src="src/js/angular.min.js"></script>
+<script src="src/js/angular-pt-br.js"></script>
+<script src="src/js/angular-animate.js"></script>
+<script src="src/js/angular-aria.js"></script>
+<script src="src/js/angular-messages.js"></script>
+<script src="src/js/angular-material.js"></script>
+<script src='src/js/angular-router.js'></script>
+<script src="src/js/angular-datatable.js"></script>
+<script src="src/js/angular-storage.js"></script>
+<script src="src/js/angular-chart.js"></script>
+<script src="src/js/angular-flow.js"></script>
+<script src="src/js/angular-glue.js"></script>
+<script src="src/js/angular-mask.js"></script>
+<script src="src/js/moment.js"></script>
+<script src="src/js/socket.js"></script>
+<script src="src/js/sweetalert.js"></script>
+
+<script type="text/javascript" src="controller/app.js"></script>
+<script type="text/javascript" src="controller/state.js"></script>
+<script type="text/javascript" src="controller/vpad.js"></script>
+<script type="text/javascript" src="controller/register.js"></script>
+<script type="text/javascript" src="controller/login.js"></script>
+<script type="text/javascript" src="controller/usuario.js?1"></script>
+<script type="text/javascript" src="controller/cliente.js?1"></script>
+<script type="text/javascript" src="controller/service.js?1"></script>
+<script type="text/javascript" src="controller/produto.js?1"></script>
+<script type="text/javascript" src="controller/fornecedor.js?1"></script>
+<script type="text/javascript" src="controller/newservice.js?1"></script>
+<script type="text/javascript" src="controller/pdv.js?1"></script>
+<script type="text/javascript" src="controller/develop.js?1"></script>
+<script type="text/javascript" src="controller/sales.js?1"></script>
+<script type="text/javascript" src="controller/cashflow.js?1"></script>
+<script type="text/javascript" src="controller/monitoring.js?1"></script>
+<script type="text/javascript" src="controller/os.js?1"></script>
+<script type="text/javascript" src="controller/payment.js?1"></script>
+<script type="text/javascript" src="controller/invoice.js?1"></script>
+
+
+<!--Outros-->
+<script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+
+
+<script>
+
+//Analytcs
+if (window.location.href.split("/")[2] != "localhost") {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', window.config_base.analytcs_id, 'auto');
+    ga('send', 'pageview');
+
+}
+
+//Facebook SDK JS
+window.fbAsyncInit = function() {
+  FB.init({
+      appId: window.config_base.facebook_id,
+      xfbml: true,
+      version: 'v2.8'
+  });
+};
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {
+      return;
+  }
+  js = d.createElement(s);
+  js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+
+//Facebook PIXEL
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', window.config_base.facebook_pixel); // Insert your pixel ID here.
+fbq('track', 'PageView');
+</script>
+
+</head>
+<body ng-app="vPadApp" ng-controller="Main" ng-cloak>
+    <div class="loadd" layout="column" layout-align="center center" ng-hide="megabigload">
+        <img src="src/img/logo_icon/android-icon-72x72.png">
+        <p style="color: gray; font-weight: 300;" class="md-headline">Carregando vPad...</p>
+    </div>
+    <ng-view ui-view="root"></ng-view>
+</body>
+</html>

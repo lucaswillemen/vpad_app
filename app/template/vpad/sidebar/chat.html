@@ -1,0 +1,112 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="chat" layout="column" flex>
+   <md-toolbar>
+      <div class="md-toolbar-tools">
+         <md-button class="md-icon-button" aria-label="Settings" ng-click="buildToggler('chat')">
+                <md-icon md-svg-icon="arrow-left"></md-icon>
+         </md-button>
+         <h2>
+            <span>Chat</span>
+         </h2>
+      </div>
+   </md-toolbar>
+   <md-tabs md-stretch-tabs="always" md-border-bottom flex>
+      <md-tab>
+         <md-tab-label>
+                <md-icon md-svg-icon="message-text-outline">
+            <md-badge class="" ng-if="conversas.length>0">{{(conversas | filter:{unread:true}).length}}</md-badge>
+         </md-tab-label>
+         <md-tab-body layout="column">
+            <div>
+            <md-list >
+               <md-subheader class="md-no-sticky" >{{conversas.length>0 ? 'Últimas mensagens' : 'Em breve terão novas conversas'}}</md-subheader>
+               <md-list-item>
+                  <p> Mostrar conversas pendentes? </p>
+                  <md-switch ng-model="switch_prox_conversas" aria-label="Switch 1"></md-switch>
+               </md-list-item>
+            </md-list>
+            <md-divider></md-divider>
+            </div>
+            <md-content flex>
+               <md-list>
+               <md-list-item ng-click="fu()" 
+                  ng-repeat="conversa in conversas | orderBy : '-last_update'"
+                  ng-hide="conversa.usuarios && switch_prox_conversas">
+                  <div layout="row" flex>
+                     <div layout="column" flex>
+                        <div layout="row" flex>
+                           <span class="md-title">{{conversa.msg[conversa.msg.length-1].nome }}</span>
+                           <span flex></span>
+                           <md-button  ng-if="conversa.usuarios" class="md-btn-badge" >
+                              <md-tooltip md-direction="left">
+                                 <span ng-repeat="user in conversa.usuarios" resolve="{{user.uid == aut_uid ? conversa.participando=true : ''}}">{{user.nome}}, 
+                                 </span>
+                              </md-tooltip>
+                <md-icon md-svg-icon="account-multiple-outline"></md-icon>
+                              <md-badge style="background:blue;">{{conversa.usuarios.length}}</md-badge>
+                           </md-button>
+                           <md-button 
+                           ng-if="
+                           conversa.usuarios 
+                           && !conversa.participando 
+                           || conversa.last_views[conversas.cod_aut]>conversa.last_update
+                           ? conversa.unread=false:conversa.unread=true"
+
+
+                           class="md-btn-badge" >
+                <md-icon md-svg-icon="message-text-outline"></md-icon>
+                              <md-badge ng-if="conversas.length>0">!!</md-badge>
+                           </md-button>
+                        </div>
+                        <span class="md-body-1"> {{ conversa.msg[conversa.msg.length-1].msg | limitTo:100 }} </span>
+                        <div layout="row">
+                           <md-button class="md-primary md-raised" ng-click="message_join(conversa._id)" ng-disabled="conversa.participando">
+                <md-icon md-svg-icon="account-multiple-outline"></md-icon>
+                              {{conversa.participando == true ? "Entrou":"Entrar"}}
+                           </md-button>
+                           <md-button class="md-primary md-raised" ng-click="message_open(conversa._id)" ng-disabled="!conversa.participando">
+                <md-icon md-svg-icon="message-text-outline"></md-icon>
+                              Abrir
+                           </md-button>
+                        </div>
+                     </div>
+                  </div>
+                  <md-divider></md-divider>
+               </md-list-item>
+               </md-list>
+            </md-content>
+         </md-tab-body>
+      </md-tab>
+      <md-tab>
+         <md-tab-label>
+                <md-icon md-svg-icon="account-multiple-outline"></md-icon>
+            <md-badge class="success" ng-if="client_online_count>0">{{client_online_count}}</md-badge>
+         </md-tab-label>
+         <md-tab-body>
+            <md-list >
+               <md-subheader class="md-no-sticky" ng-if="client_online_count>0">Clientes online</md-subheader>
+               <md-subheader class="md-no-sticky" ng-if="!client_online_count>0">Nenhum cliente online</md-subheader>
+               <md-progress-linear md-mode="indeterminate" ng-show="barload"></md-progress-linear>
+               <md-list-item ng-repeat="cliente in client_online">
+                <md-icon md-svg-icon="account-outline"></md-icon>
+                  <p> {{ cliente.nome }} </p>
+               </md-list-item>
+            </md-list>
+         </md-tab-body>
+      </md-tab>
+      <md-tab flex>
+         <md-tab-label>
+                <md-icon md-svg-icon="city"></md-icon>
+            <md-badge class="success" ng-if="user_online_count>0">{{user_online_count}}</md-badge>
+         </md-tab-label>
+         <md-tab-body>
+            <md-list >
+               <md-subheader class="md-no-sticky" ng-if="user_online_count>0">Usuários online</md-subheader>
+               <md-list-item ng-repeat="empresas in user_online">
+                <md-icon md-svg-icon="city"></md-icon>
+                  <p> {{ empresas.nome }} </p>
+               </md-list-item>
+            </md-list>
+         </md-tab-body>
+      </md-tab>
+   </md-tabs>
+</md-sidenav>

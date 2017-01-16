@@ -82,6 +82,7 @@ app.controller('cashflow', function($scope, $rootScope, $mdDialog, $document) {
             data: {
                 labels: lb,
                 datasets: [{
+                    label: 'Valor das movimentações no dia',
                     data: ind,
                     backgroundColor: 'rgba(3, 155, 229, 0.5)',
                     borderColor: 'rgb(3, 155, 229)',

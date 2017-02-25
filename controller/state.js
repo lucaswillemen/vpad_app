@@ -200,5 +200,5 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $mdTh
             }
         })
     $urlRouterProvider.otherwise("/login")
-    $locationProvider.html5Mode(true);
+    //$locationProvider.html5Mode(true);
 })

@@ -1,4 +1,4 @@
-app.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, $mdDateLocaleProvider) {
+app.config(function($stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider, $mdDateLocaleProvider) {
 
     $mdDateLocaleProvider.parseDate = function(dateString) {
       var m = moment(dateString, 'DD/MM/YYYY', true);
@@ -200,4 +200,5 @@ app.config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, $mdD
             }
         })
     $urlRouterProvider.otherwise("/login")
+    $locationProvider.html5Mode(true);
 })

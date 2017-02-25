@@ -11,8 +11,8 @@ app.controller("payment", function($scope, $localStorage, $rootScope, $filter, $
     $scope.today = new Date()
 
 
-    $scope.data.card = 4235647728025682
-    Mercadopago.setPublishableKey("TEST-b135d529-8498-4fe3-b3e3-d7fc43ce5ce4");
+    //$scope.data.card = 4235647728025682
+    Mercadopago.setPublishableKey("APP_USR-367324a1-1b15-4f99-b93e-c4e88fcdac43");
     Mercadopago.clearSession();
 
     $rootScope.socket.emit("abrir_fatura", $rootScope.aut)
